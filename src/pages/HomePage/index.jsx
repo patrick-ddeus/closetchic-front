@@ -1,5 +1,6 @@
 import React from 'react';
 import DescountBar from '../../components/DescountBar';
+import Footer from '../../components/Footer';
 import Header from '../../components/Header';
 import MainContent from './MainContent';
 
@@ -9,7 +10,7 @@ const HomePage = () => {
             <DescountBar />
             <Header />
             <MainContent />
-    
+            <Footer/>
         </div>
     );
 };

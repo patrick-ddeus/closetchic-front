@@ -1,13 +1,38 @@
 import React from 'react';
-import { Container, ProductsArea, ProductCard } from './styles';
-import { FiShoppingCart } from "react-icons/fi";
+import { Container, ProductsArea, ProductCard, TitleContainer, ButtonArrow } from './styles';
+import { FiShoppingCart, FiArrowLeft, FiArrowRight } from "react-icons/fi";
 import p1 from "../../../../assets/p1.png";
 
 const FeatureProducts = () => {
+  const scrollContainer = React.useRef(null);
+
+  function scrollLeft() {
+    if (scrollContainer.current) {
+      scrollContainer.current.scrollLeft -= 500;
+    }
+  }
+
+  function scrollRight() {
+    if (scrollContainer.current) {
+      scrollContainer.current.scrollLeft += 500;
+    }
+  }
   return (
     <Container>
-      <h3>Produtos em Destaque</h3>
-      <ProductsArea>
+      <TitleContainer>
+        <h3>Produtos em Destaque</h3>
+        <div>
+          <ButtonArrow onClick={scrollLeft}>
+            <FiArrowLeft />
+          </ButtonArrow>
+
+          <ButtonArrow onClick={scrollRight}>
+            <FiArrowRight />
+          </ButtonArrow>
+        </div>
+
+      </TitleContainer>
+      <ProductsArea ref={scrollContainer}>
         <ProductCard>
           <div className='productImageArea'>
             <img src={p1} alt="" />
@@ -68,10 +93,7 @@ const FeatureProducts = () => {
           </div>
         </ProductCard>
       </ProductsArea>
-      <h3>aaaaaaaa</h3>
-      <h3>aaaaaaaa</h3>
-      <h3>aaaaaaaa</h3>
-      <h3>aaaaaaaa</h3>
+      
     </Container>
   );
 };

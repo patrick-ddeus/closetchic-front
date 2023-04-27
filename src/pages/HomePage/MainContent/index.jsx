@@ -1,7 +1,8 @@
 import React from 'react';
 import { Container, Banner, BannerButton, TopSection, CardSection, Card, CardIcon } from './styles';
-import { FiSmile, FiDollarSign, FiBox, FiTruck} from "react-icons/fi";
+import { FiSmile, FiDollarSign, FiBox, FiTruck } from "react-icons/fi";
 import FeatureProducts from './FeatureProducts';
+import DescountBanner from './DescountBanner';
 
 const MainContent = () => {
     return (
@@ -54,7 +55,8 @@ const MainContent = () => {
                         para os clientes fidelidade.</p>
                 </Card>
             </CardSection>
-            <FeatureProducts/>
+            <FeatureProducts />
+            <DescountBanner />
         </Container>
     );
 };

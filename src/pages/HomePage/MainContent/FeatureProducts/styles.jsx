@@ -1,45 +1,54 @@
 import styled from 'styled-components';
 import "@fontsource/raleway/600.css";
+import "@fontsource/raleway/300.css";
+import "@fontsource/raleway/700.css";
 
 export const Container = styled.div`
   margin-top:74px;
 `;
 
+export const TitleContainer = styled.div`
+  display:flex;
+  justify-content: space-between;
+
+  div{
+    display:flex;
+    gap:10px;
+  }
+`;
+
+export const ButtonArrow = styled.button`
+  width:52px;
+  height:52px;
+  border-radius:10px;
+  background-color: #1d242d;
+  border:0;
+  color:white;
+  font-size:24px;
+  cursor:pointer;
+`;
+
 export const ProductsArea = styled.div`
     margin-top:25px;
-    padding-bottom:25px;
+    padding-bottom:100px;
     display:flex;
     gap:20px;
-    overflow-y:hidden;
-    overflow-x:scroll;
-    scrollbar-width: thin;
-
-    &::-webkit-scrollbar {
-        height: 7px;
-  }
-  
-    /* Track */
-    &::-webkit-scrollbar-track {
-        background:#D9D9D9;
-    }
-    
-    /* Handle */
-    &::-webkit-scrollbar-thumb {
-        background: black; 
-    }
-    
-    /* Handle on hover */
-    &::-webkit-scrollbar-thumb:hover {
-        background: #555; 
-    }
+    overflow:hidden;
+    scroll-behavior: smooth;
 `;
 
 export const ProductCard = styled.div`
     .productImageArea{
-        width:380px;
+        width:385px;
         height:515px;
         background-color:#F6F6F6;
         border-radius:5px;
+        position:relative;
+
+        img{
+            position:absolute;
+            bottom:0;
+        }
     }
 
     .descArea p:nth-child(1){
@@ -65,6 +74,8 @@ export const ProductCard = styled.div`
         align-items: center;
         justify-content: center;
         border-radius:10px;
+        cursor:pointer;
     }
   
 `;
+

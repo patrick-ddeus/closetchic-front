@@ -60,6 +60,12 @@ export const TopSection = styled.section`
   }
 
   div:nth-child(2){
+    border-left:2px solid black;
+    padding-left:61px;
+    height:77px;
+    display:flex;
+    align-items:center;
+
     p{
         font-family:"Raleway", sans-serif;
         font-weight:500;
@@ -68,15 +74,6 @@ export const TopSection = styled.section`
     }
   }
 
-  div:nth-child(1)::after{
-    content:"";
-    position:absolute;
-    height:77px;
-    width:2px;
-    background-color:black;
-    right:-35%;
-    bottom:0;
-  }
 `;
 
 export const CardSection = styled.section`
