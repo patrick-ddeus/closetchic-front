@@ -190,5 +190,16 @@ export const AddToCart = styled.div`
 `;
 
 export const DescriptionArea = styled.div`
-  
+  padding:0 72px;
+
+  h4{
+    font-weight:700;
+    font-size:32px;
+    border-bottom:1px solid #E3E3E3;
+    padding-bottom:14px;
+  }
+
+  p{
+    padding-top:14px;
+  }
 `;

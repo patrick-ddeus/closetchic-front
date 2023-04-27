@@ -103,7 +103,8 @@ const ProductPage = () => {
         </RightColumn>
       </MainContainer>
       <DescriptionArea>
-            
+        <h4>Descrição</h4>
+        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Odio libero non quisquam labore vitae necessitatibus, fugiat delectus sed placeat voluptatibus doloribus, autem repudiandae inventore dolores sunt temporibus obcaecati error. Repudiandae omnis, beatae nam perferendis ea ex magni quaerat voluptatem cupiditate sapiente! Tempore officia quisquam voluptatem blanditiis at eos inventore amet!</p>
       </DescriptionArea>
     </div>
   );
