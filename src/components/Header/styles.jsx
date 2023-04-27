@@ -9,10 +9,12 @@ export const Container = styled.header`
   justify-content: space-between;
   align-items: center;
 
-  h1{
+  .title{
     font-family:"Righteous", sans-serif;
     font-weight: 400;
     font-size:40px;
+    color:black;
+    position:relative;
   }
 `;
 
@@ -34,7 +36,7 @@ export const ListItem = styled.li`
     &::after {
         content: "";
         display: block;
-        width: 0px;
+        width: ${({ active }) => active ? `80%` : "0"};
         height: 2px;
         position: absolute;
         background-color: #1C232C;
@@ -45,21 +47,9 @@ export const ListItem = styled.li`
         transform: scale(1.08);
     }
 
-    ${({ active }) => active && `
-        &{
-            position: relative;
-        }
-        &::after {
-        content: "";
-        display: block;
-        width: 80%;
-        height: 2px;
-        position: absolute;
-        background-color: #1C232C;
-        left: 2px;
+    a{
+      color:black;
     }
-    `}
-
    
 `;
 
