@@ -40,6 +40,12 @@ export const BannerButton = styled.button`
   border:0;
   cursor:pointer;
   margin-top:60px;
+  transition:all .4s ease-in-out;
+
+  &:hover{
+    background-color:#1D242D;
+    color:white;
+  }
 `;
 
 export const TopSection = styled.section`

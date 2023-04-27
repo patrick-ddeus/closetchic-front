@@ -6,7 +6,7 @@ export const Container = styled.div`
     height:326px;
     display:grid;
     grid-template-columns: 1fr 1fr;
-    margin-bottom:150px;
+    margin-bottom:100px;
 
     .left-column{
         background:linear-gradient(0deg, rgba(0, 0, 0, 0.65), rgba(0, 0, 0, 0.65)), url(${girl});
