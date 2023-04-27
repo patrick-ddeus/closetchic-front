@@ -191,7 +191,7 @@ export const AddToCart = styled.div`
 
 export const DescriptionArea = styled.div`
   padding:0 72px;
-
+  margin-bottom:140px;
   h4{
     font-weight:700;
     font-size:32px;

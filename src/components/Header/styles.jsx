@@ -19,11 +19,48 @@ export const Container = styled.header`
 
 export const List = styled.ul`
   display:flex;
-  gap:14px;
+  gap:30px;
 
-  li{
+`;
+
+export const ListItem = styled.li`
+    transition: transform .15s ease;
+    position: relative;
     cursor:pointer;
-  }
+
+    &:hover::after {
+        width: 80%;
+    }
+    &::after {
+        content: "";
+        display: block;
+        width: 0px;
+        height: 2px;
+        position: absolute;
+        background-color: #1C232C;
+        left: 2px;
+        transition: width .3s ease-in-out;
+    }
+    &:hover{
+        transform: scale(1.08);
+    }
+
+    ${({ active }) => active && `
+        &{
+            position: relative;
+        }
+        &::after {
+        content: "";
+        display: block;
+        width: 80%;
+        height: 2px;
+        position: absolute;
+        background-color: #1C232C;
+        left: 2px;
+    }
+    `}
+
+   
 `;
 
 export const SearchArea = styled.div`

@@ -22,6 +22,7 @@ import guy from "../../assets/p1.png";
 import { IoIosStar } from "react-icons/io";
 import { FiMinus, FiPlus, FiShoppingCart } from "react-icons/fi";
 import { useParams } from 'react-router-dom';
+import Footer from '../../components/Footer';
 
 const ProductPage = () => {
   const [size, setSize] = React.useState("p");
@@ -106,6 +107,7 @@ const ProductPage = () => {
         <h4>Descrição</h4>
         <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Odio libero non quisquam labore vitae necessitatibus, fugiat delectus sed placeat voluptatibus doloribus, autem repudiandae inventore dolores sunt temporibus obcaecati error. Repudiandae omnis, beatae nam perferendis ea ex magni quaerat voluptatem cupiditate sapiente! Tempore officia quisquam voluptatem blanditiis at eos inventore amet!</p>
       </DescriptionArea>
+      <Footer/>
     </div>
   );
 };
