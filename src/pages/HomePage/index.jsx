@@ -1,12 +1,17 @@
 import React from 'react';
 import DescountBar from '../../components/DescountBar';
+import Header from '../../components/Header';
+import MainContent from './MainContent';
 
 const HomePage = () => {
     return (
         <div>
-            <DescountBar/>
+            <DescountBar />
+            <Header />
+            <MainContent />
+    
         </div>
     );
-}
+};
 
 export default HomePage;
