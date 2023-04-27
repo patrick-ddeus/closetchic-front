@@ -6,11 +6,11 @@ import Footer from '../../components/Footer';
 import ClosetChicApi from '../../service/closetChic.api';
 import ProductCard from './ProductCard';
 
-const TYPES = {
+const TYPES = Object.freeze({
     FETCH_REQUEST: 'FETCH_REQUEST',
     FETCH_SUCCESS: 'FETCH_SUCCESS',
     FETCH_ERROR: 'FETCH_ERROR'
-};
+});
 
 const reducer = (state, action) => {
     switch (action.type) {
