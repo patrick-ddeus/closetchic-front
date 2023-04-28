@@ -54,7 +54,7 @@ export const ListItem = styled.li`
 `;
 
 export const SearchArea = styled.div`
-  width:199px;
+  
   height:41px;
   display:flex;
   align-items: center;
@@ -72,6 +72,8 @@ export const SearchArea = styled.div`
     font-size:20px;
     color:#AFAFAF;
   }
+
+  
 `;
 
 export const SearchInput = styled.input`
@@ -79,6 +81,12 @@ export const SearchInput = styled.input`
     background-color:transparent;
     height:100%;
     outline:0;
+    width:70px;
+    transition:width .5s ease;
+
+    &:focus{
+      width:199px;
+    }
 `;
 
 export const SearchIconsArea = styled.div`
