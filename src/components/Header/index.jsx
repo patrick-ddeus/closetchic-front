@@ -16,9 +16,21 @@ const Header = () => {
                         Comprar
                     </Link>
                 </ListItem>
-                <ListItem active={false}>Mais Procurados</ListItem>
-                <ListItem active={false}>Lançamentos</ListItem>
-                <ListItem active={false}>Marcas</ListItem>
+                <ListItem active={false}>
+                    <Link to="/under-construction">
+                        Mais Procurados
+                    </Link>
+                </ListItem>
+                <ListItem active={false}>
+                    <Link to="/under-construction">
+                        Lançamentos
+                    </Link>
+                </ListItem>
+                <ListItem active={false}>
+                    <Link to="/under-construction">
+                        Marcas
+                    </Link>
+                </ListItem>
             </List>
             <SearchIconsArea>
                 <SearchArea>
