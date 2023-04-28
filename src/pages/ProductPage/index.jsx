@@ -49,7 +49,7 @@ const ProductPage = () => {
   const [size, setSize] = useState("p");
   const quantityRef = useRef(null);
   const { slug } = useParams();
-  
+
   const [{ loading, error, product }, dispatch] =
     useReducer(reducer, {
       product: null,
@@ -58,6 +58,7 @@ const ProductPage = () => {
     });
 
   useEffect(() => {
+    window.scrollTo(0, 50);
     async function fetchProducts() {
       dispatch({ type: TYPES.FETCH_REQUEST });
       try {

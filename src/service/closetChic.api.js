@@ -25,7 +25,18 @@ const getOneProduct = async (product) => {
     }
 }
 
+const getFeaturedProducts = async () => {
+    try {
+        const response = await axiosInstance.get(`/products/featured-products`);
+        return response.data;
+    } catch (error) {
+        return error.data;
+    }
+}
+
+
 export default {
     getProducts,
-    getOneProduct
+    getOneProduct,
+    getFeaturedProducts
 };
