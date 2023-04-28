@@ -70,9 +70,6 @@ const StorePage = () => {
         <div>
             <DescountBar />
             <Header />
-            <BannerMen>
-                <h2>Estilo e conforto para o homem moderno</h2>
-            </BannerMen>
             {loading ? (
                 <SkeletonStore />
             ) : error ? (
@@ -98,6 +95,9 @@ const StorePage = () => {
                             duration: 0.5,
                             ease: [0.43, 0.13, 0.23, 0.96]
                         }}>
+                        <BannerMen>
+                            <h2>Estilo e conforto para o homem moderno</h2>
+                        </BannerMen>
                         <Products>
                             {products.map((product) => (
                                 <Link key={product._id} to={`/products/${product.slug}`}>

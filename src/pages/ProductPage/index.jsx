@@ -128,7 +128,7 @@ const ProductPage = () => {
                   </span>
                   ({product?.rating.toFixed(1)})
                 </p>
-                <Price>R$ {product?.price}</Price>
+                <Price>R$ {product?.price.toFixed(2).replace(".", ",")}</Price>
               </ProductDetailArea>
 
               <SizeArea>

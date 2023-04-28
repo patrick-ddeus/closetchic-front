@@ -18,7 +18,7 @@ const ProductCard = ({ product }) => {
                 <div>
                     {formatStars(product)}
                 </div>
-                <p>R$ {product.price}</p>
+                <p>R$ {product.price.toFixed(2).replace(".", ",")}</p>
             </ProductDescription>
         </Product >);
 };

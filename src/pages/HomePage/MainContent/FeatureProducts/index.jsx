@@ -57,7 +57,7 @@ const FeatureProducts = () => {
             <div className='productDescArea'>
               <div className="descArea">
                 <p>{product.name.split(" ").slice(0, 2).join(" ")}</p>
-                <p>R$ {product.price},00</p>
+                <p>R$ {product.price.toFixed(2).replace(".", ",")}</p>
               </div>
               <div className='cartIconArea' onClick={() => navigate(`/products/${product.slug}`)}>
                 <FiShoppingCart />
