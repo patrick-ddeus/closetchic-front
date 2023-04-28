@@ -49,7 +49,7 @@ const ProductPage = () => {
   const [size, setSize] = useState("p");
   const quantityRef = useRef(null);
   const { slug } = useParams();
-
+  
   const [{ loading, error, product }, dispatch] =
     useReducer(reducer, {
       product: null,

@@ -6,14 +6,15 @@ const axiosInstance = axios.create({
     headers: { "Content-Type": "application/json" },
 });
 
-const getProducts = async () => {
+const getProducts = async (query = "") => {
     try {
-        const response = await axiosInstance.get('/products');
+        const response = await axiosInstance.get(`/products/${query}`);
         return response.data;
     } catch (error) {
         return error.data;
     }
 };
+
 
 const getOneProduct = async (product) => {
     try {

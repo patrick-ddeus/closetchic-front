@@ -1,8 +1,6 @@
 import { Link, useNavigate } from "react-router-dom"
 import { useState } from "react"
 import axios from 'axios';
-
-
 import "@fontsource/raleway"
 import "@fontsource/inter"
 import { IoMdMail, IoMdPerson, IoIosLock } from "react-icons/io";
@@ -18,11 +16,9 @@ export default function SignUpPage() {
   function handleChange(event) {
     if (event.target.name === "repeatPassword") {
       repeatPassword = event.target.value
-      console.log(repeatPassword)
     }
     else {
       setForm({ ...form, [event.target.name]: event.target.value })
-      console.log(form)
     }
 
   }
@@ -40,7 +36,6 @@ export default function SignUpPage() {
     })
     promise.catch((a) => {
       alert(a)
-      console.log(a)
       setIsDisabled(false)
     })
   }

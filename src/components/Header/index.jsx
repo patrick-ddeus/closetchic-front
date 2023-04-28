@@ -1,11 +1,20 @@
-import React from 'react';
+import React, { useRef } from 'react';
 import { Container, List, ListItem, SearchArea, IconsArea, SearchInput, SearchIconsArea } from './styles';
 import { IoSearchOutline } from "react-icons/io5";
 import { FiShoppingCart, FiUser } from "react-icons/fi";
-import { Link, useLocation } from 'react-router-dom';
+import { Link, useLocation, useNavigate } from 'react-router-dom';
 
 const Header = () => {
     const { pathname } = useLocation();
+    const navigate = useNavigate();
+    const searchRef = useRef(null);
+
+    const handleSearch = (event) => {
+        if (event.key === "Enter") {
+            const formatedQuery = searchRef.current?.value.replace(" ", "%").toLowerCase();
+            navigate(`/products?q=${formatedQuery}`);
+        }
+    };
 
     return (
         <Container active={pathname === "/"}>
@@ -37,7 +46,7 @@ const Header = () => {
                     <div>
                         <IoSearchOutline />
                     </div>
-                    <SearchInput type="text" placeholder='Pesquisar' />
+                    <SearchInput type="text" placeholder='Pesquisar' ref={searchRef} onKeyUp={handleSearch} />
                 </SearchArea>
                 <IconsArea>
                     <FiShoppingCart />

@@ -1,11 +1,11 @@
-import React, { useReducer } from 'react';
+import React, { useReducer, useState, useEffect } from 'react';
 import DescountBar from '../../components/DescountBar';
 import Header from '../../components/Header';
-import { Products } from './styles';
+import { Products, PaginationArea, PaginationButton } from './styles';
 import Footer from '../../components/Footer';
 import ClosetChicApi from '../../service/closetChic.api';
 import ProductCard from './ProductCard';
-import { Link } from 'react-router-dom';
+import { Link, useSearchParams } from 'react-router-dom';
 import { motion } from 'framer-motion';
 import SkeletonStore from './Skeleton';
 
@@ -20,9 +20,9 @@ const reducer = (state, action) => {
         case TYPES.FETCH_REQUEST:
             return { ...state, loading: true };
         case TYPES.FETCH_SUCCESS:
-            return { ...state, products: action.payload, loading: false };
+            return { ...state, error: "", products: action.payload, loading: false };
         case TYPES.FETCH_ERROR:
-            return { ...state, products: action.payload, loading: false };
+            return { ...state, error: action.payload, loading: false };
         default:
             return { ...state, loading: false };
     }
@@ -35,20 +35,36 @@ const StorePage = () => {
             loading: false,
             error: ''
         });
+    const [searchParams, setSearchParams] = useSearchParams();
+    const [page, setPage] = useState(1);
 
-    React.useEffect(() => {
+    useEffect(() => {
         async function fetchProducts() {
             dispatch({ type: TYPES.FETCH_REQUEST });
             try {
-                const response = await ClosetChicApi.getProducts();
+                const response = await ClosetChicApi.getProducts(`?page=${page}`);
                 dispatch({ type: TYPES.FETCH_SUCCESS, payload: response.products });
             } catch (error) {
                 dispatch({ type: TYPES.FETCH_ERROR, payload: error.message });
             }
         }
 
-        fetchProducts();
-    }, []);
+        async function fetchProductsByQueryString() {
+            dispatch({ type: TYPES.FETCH_REQUEST });
+            try {
+                const response = await ClosetChicApi.getOneProduct(`?q=${searchParams.get('q')}`);
+                dispatch({ type: TYPES.FETCH_SUCCESS, payload: response.products });
+            } catch (error) {
+                dispatch({ type: TYPES.FETCH_ERROR, payload: error.message });
+            }
+        }
+
+        if (searchParams.get('q')) {
+            fetchProductsByQueryString();
+        } else {
+            fetchProducts();
+        }
+    }, [searchParams, page]);
 
     return (
         <div>
@@ -56,6 +72,8 @@ const StorePage = () => {
             <Header />
             {loading ? (
                 <SkeletonStore />
+            ) : error ? (
+                <h2>Produto não encontrado</h2>
             ) :
                 (
                     <motion.div
@@ -84,10 +102,16 @@ const StorePage = () => {
                                 </Link>
                             ))}
                         </Products>
+                        <PaginationArea>
+                            {[...Array(2)].map((_, i) => (
+                                <PaginationButton key={i} active={i + 1 === page} onClick={() => setPage(i + 1)}>
+                                    {i + 1}
+                                </PaginationButton>
+                            ))}
+                        </PaginationArea>
                         <Footer />
                     </motion.div>
                 )}
-
         </div>
     );
 };

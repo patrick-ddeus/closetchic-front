@@ -24,12 +24,9 @@ export default function SignInPage() {
             setToken(a.data.token)
             setName(a.data.name)
             localStorage.setItem("token", a.data.token)
-            console.log("name", a.data.name)
-            console.log("localstorage", localStorage.getItem("token"))
         })
         promise.catch((a) => {
             alert(a.message)
-            console.log(a)
             setIsDisabled(false)
         })
 
