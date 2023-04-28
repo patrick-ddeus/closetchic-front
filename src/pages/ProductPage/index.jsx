@@ -58,6 +58,7 @@ const ProductPage = () => {
     });
 
   useEffect(() => {
+    window.scrollTo(0, 50);
     async function fetchProducts() {
       dispatch({ type: TYPES.FETCH_REQUEST });
       try {
@@ -127,7 +128,7 @@ const ProductPage = () => {
                   </span>
                   ({product?.rating.toFixed(1)})
                 </p>
-                <Price>R$ {product?.price}</Price>
+                <Price>R$ {product?.price.toFixed(2).replace(".", ",")}</Price>
               </ProductDetailArea>
 
               <SizeArea>

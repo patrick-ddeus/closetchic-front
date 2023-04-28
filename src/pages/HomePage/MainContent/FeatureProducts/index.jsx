@@ -1,10 +1,26 @@
-import React from 'react';
+import { useRef, useState, useEffect } from 'react';
 import { Container, ProductsArea, ProductCard, TitleContainer, ButtonArrow } from './styles';
 import { FiShoppingCart, FiArrowLeft, FiArrowRight } from "react-icons/fi";
-import p1 from "../../../../assets/p1.png";
+import ClosetChicApi from '../../../../service/closetChic.api';
+import { useNavigate } from 'react-router-dom';
 
 const FeatureProducts = () => {
-  const scrollContainer = React.useRef(null);
+  const scrollContainer = useRef(null);
+  const [featuredProducts, setFeaturedProducts] = useState([]);
+  const navigate = useNavigate()
+
+  useEffect(() => {
+    async function fetchFeaturedProducts() {
+      try {
+        const response = await ClosetChicApi.getFeaturedProducts();
+        setFeaturedProducts(response.products);
+      } catch (error) {
+        console.error(error);
+      }
+    }
+
+    fetchFeaturedProducts();
+  }, []);
 
   function scrollLeft() {
     if (scrollContainer.current) {
@@ -33,67 +49,24 @@ const FeatureProducts = () => {
 
       </TitleContainer>
       <ProductsArea ref={scrollContainer}>
-        <ProductCard>
-          <div className='productImageArea'>
-            <img src={p1} alt="" />
-          </div>
-          <div className='productDescArea'>
-            <div className="descArea">
-              <p>Roupa 1</p>
-              <p>R$ 150,00</p>
+        {featuredProducts.map(product => (
+          <ProductCard>
+            <div className='productImageArea'>
+              <img src={product.image} alt="" />
             </div>
-            <div className='cartIconArea'>
-              <FiShoppingCart />
+            <div className='productDescArea'>
+              <div className="descArea">
+                <p>{product.name.split(" ").slice(0, 2).join(" ")}</p>
+                <p>R$ {product.price.toFixed(2).replace(".", ",")}</p>
+              </div>
+              <div className='cartIconArea' onClick={() => navigate(`/products/${product.slug}`)}>
+                <FiShoppingCart />
+              </div>
             </div>
-          </div>
-        </ProductCard>
-
-        <ProductCard>
-          <div className='productImageArea'>
-            <img src={p1} alt="" />
-          </div>
-          <div className='productDescArea'>
-            <div className="descArea">
-              <p>Roupa 1</p>
-              <p>R$ 150,00</p>
-            </div>
-            <div className='cartIconArea'>
-              <FiShoppingCart />
-            </div>
-          </div>
-        </ProductCard>
-
-        <ProductCard>
-          <div className='productImageArea'>
-            <img src={p1} alt="" />
-          </div>
-          <div className='productDescArea'>
-            <div className="descArea">
-              <p>Roupa 1</p>
-              <p>R$ 150,00</p>
-            </div>
-            <div className='cartIconArea'>
-              <FiShoppingCart />
-            </div>
-          </div>
-        </ProductCard>
-
-        <ProductCard>
-          <div className='productImageArea'>
-            <img src={p1} alt="" />
-          </div>
-          <div className='productDescArea'>
-            <div className="descArea">
-              <p>Roupa 1</p>
-              <p>R$ 150,00</p>
-            </div>
-            <div className='cartIconArea'>
-              <FiShoppingCart />
-            </div>
-          </div>
-        </ProductCard>
+          </ProductCard>
+        ))}
       </ProductsArea>
-      
+
     </Container>
   );
 };

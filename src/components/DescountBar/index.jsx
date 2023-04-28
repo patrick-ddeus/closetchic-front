@@ -4,7 +4,6 @@ import { Container } from './styles';
 
 const DescountBar = () => {
     const location = useLocation();
-    console.log(location.pathname)
     return (
         <Container>
             {location.pathname === "/under-construction" ?
