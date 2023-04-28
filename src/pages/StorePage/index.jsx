@@ -6,6 +6,8 @@ import Footer from '../../components/Footer';
 import ClosetChicApi from '../../service/closetChic.api';
 import ProductCard from './ProductCard';
 import { Link } from 'react-router-dom';
+import { motion } from 'framer-motion';
+import SkeletonStore from './Skeleton';
 
 const TYPES = Object.freeze({
     FETCH_REQUEST: 'FETCH_REQUEST',
@@ -52,14 +54,40 @@ const StorePage = () => {
         <div>
             <DescountBar />
             <Header />
-            <Products>
-                {products.map((product) => (
-                    <Link key={product._id} to={`/products/${product.slug}`}>
-                        <ProductCard product={product} />
-                    </Link>
-                ))}
-            </Products>
-            <Footer />
+            {loading ? (
+                <SkeletonStore />
+            ) :
+                (
+                    <motion.div
+                        initial={{
+                            opacity: 0,
+                            duration: 0.5,
+                            ease: [0.43, 0.13, 0.23, 0.96]
+                        }}
+                        animate={{
+                            opacity: 1,
+                            transition: {
+                                delay: 0.5,
+                                duration: 0.5,
+                                ease: [0.43, 0.13, 0.23, 0.96]
+                            }
+                        }}
+                        exit={{
+                            opacity: 0,
+                            duration: 0.5,
+                            ease: [0.43, 0.13, 0.23, 0.96]
+                        }}>
+                        <Products>
+                            {products.map((product) => (
+                                <Link key={product._id} to={`/products/${product.slug}`}>
+                                    <ProductCard product={product} />
+                                </Link>
+                            ))}
+                        </Products>
+                        <Footer />
+                    </motion.div>
+                )}
+
         </div>
     );
 };

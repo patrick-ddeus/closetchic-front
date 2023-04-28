@@ -23,6 +23,8 @@ import { useParams } from 'react-router-dom';
 import Footer from '../../components/Footer';
 import ClosetChicApi from '../../service/closetChic.api';
 import formatStars from '../../utils/FormatStars';
+import { motion } from 'framer-motion';
+import SkeletonProductPage from './Skeleton';
 
 const TYPES = Object.freeze({
   FETCH_REQUEST: 'FETCH_REQUEST',
@@ -80,75 +82,98 @@ const ProductPage = () => {
     <div>
       <DescountBar />
       <Header />
-      <MainContainer>
-        <LeftColumn>
-          <BigMiniature>
-            <img src={product?.image} alt="" />
-          </BigMiniature>
-
-          <MiniatureArea>
-            {[...Array(3)].map((_, index) => (
-              <Miniature key={index}>
+      {loading ? (<SkeletonProductPage />) : (
+        <motion.div
+          initial={{
+            opacity: 0,
+            duration: 0.5,
+            ease: [0.43, 0.13, 0.23, 0.96]
+          }}
+          animate={{
+            opacity: 1,
+            transition: {
+              delay: 0.5,
+              duration: 0.5,
+              ease: [0.43, 0.13, 0.23, 0.96]
+            }
+          }}
+          exit={{
+            opacity: 0,
+            duration: 0.5,
+            ease: [0.43, 0.13, 0.23, 0.96]
+          }}>
+          <MainContainer>
+            <LeftColumn>
+              <BigMiniature>
                 <img src={product?.image} alt="" />
-              </Miniature>
-            ))}
+              </BigMiniature>
 
-          </MiniatureArea>
-        </LeftColumn>
+              <MiniatureArea>
+                {[...Array(3)].map((_, index) => (
+                  <Miniature key={index}>
+                    <img src={product?.image} alt="" />
+                  </Miniature>
+                ))}
 
-        <RightColumn>
-          <ProductDetailArea>
-            <h4>{product?.name}</h4>
+              </MiniatureArea>
+            </LeftColumn>
+
+            <RightColumn>
+              <ProductDetailArea>
+                <h4>{product?.name}</h4>
+                <p>
+                  <span>
+                    {product && formatStars(product)}
+                  </span>
+                  ({product?.rating.toFixed(1)})
+                </p>
+                <Price>R$ {product?.price}</Price>
+              </ProductDetailArea>
+
+              <SizeArea>
+                <p>Tamanhos disponíveis</p>
+
+                <SizeButtonArea>
+                  <SizeButton selected={size === "p"} onClick={() => setSize("p")}>
+                    P
+                  </SizeButton>
+                  <SizeButton selected={size === "m"} onClick={() => setSize("m")}>
+                    M
+                  </SizeButton>
+                  <SizeButton selected={size === "g"} onClick={() => setSize("g")}>
+                    G
+                  </SizeButton>
+                </SizeButtonArea>
+              </SizeArea>
+
+              <FinishOrderArea>
+                <Quantity>
+                  <button onClick={() => updateQuantity(false)}>
+                    <FiMinus />
+                  </button>
+                  <input type="text" disabled value={1} ref={quantityRef} />
+                  <button onClick={() => updateQuantity(true)}>
+                    <FiPlus />
+                  </button>
+                </Quantity>
+
+                <AddToCart>
+                  Adicionar ao carrinho
+                  <FiShoppingCart />
+                </AddToCart>
+              </FinishOrderArea>
+            </RightColumn>
+          </MainContainer>
+          <DescriptionArea>
+            <h4>Descrição</h4>
             <p>
-              <span>
-                {product && formatStars(product)}
-              </span>
-              (5.0)
+              {product?.description}
             </p>
-            <Price>R$ {product?.price}</Price>
-          </ProductDetailArea>
+          </DescriptionArea>
+          <Footer />
+        </motion.div>
+      )}
 
-          <SizeArea>
-            <p>Tamanhos disponíveis</p>
-
-            <SizeButtonArea>
-              <SizeButton selected={size === "p"} onClick={() => setSize("p")}>
-                P
-              </SizeButton>
-              <SizeButton selected={size === "m"} onClick={() => setSize("m")}>
-                M
-              </SizeButton>
-              <SizeButton selected={size === "g"} onClick={() => setSize("g")}>
-                G
-              </SizeButton>
-            </SizeButtonArea>
-          </SizeArea>
-
-          <FinishOrderArea>
-            <Quantity>
-              <button onClick={() => updateQuantity(false)}>
-                <FiMinus />
-              </button>
-              <input type="text" disabled value={1} ref={quantityRef} />
-              <button onClick={() => updateQuantity(true)}>
-                <FiPlus />
-              </button>
-            </Quantity>
-
-            <AddToCart>
-              Adicionar ao carrinho
-              <FiShoppingCart />
-            </AddToCart>
-          </FinishOrderArea>
-        </RightColumn>
-      </MainContainer>
-      <DescriptionArea>
-        <h4>Descrição</h4>
-        <p>
-          {product?.description}
-        </p>
-      </DescriptionArea>
-      <Footer />
     </div>
   );
 };
