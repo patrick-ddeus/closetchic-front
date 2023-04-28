@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useReducer, useState, useRef, useEffect } from 'react';
 import {
   MainContainer,
   LeftColumn,
@@ -18,16 +18,56 @@ import {
 } from './styles';
 import Header from "../../components/Header";
 import DescountBar from '../../components/DescountBar';
-import guy from "../../assets/p1.png";
-import { IoIosStar } from "react-icons/io";
 import { FiMinus, FiPlus, FiShoppingCart } from "react-icons/fi";
 import { useParams } from 'react-router-dom';
 import Footer from '../../components/Footer';
+import ClosetChicApi from '../../service/closetChic.api';
+import formatStars from '../../utils/FormatStars';
+
+const TYPES = Object.freeze({
+  FETCH_REQUEST: 'FETCH_REQUEST',
+  FETCH_SUCCESS: 'FETCH_SUCCESS',
+  FETCH_ERROR: 'FETCH_ERROR'
+});
+
+const reducer = (state, action) => {
+  switch (action.type) {
+    case TYPES.FETCH_REQUEST:
+      return { ...state, loading: true };
+    case TYPES.FETCH_SUCCESS:
+      return { ...state, product: action.payload, loading: false };
+    case TYPES.FETCH_ERROR:
+      return { ...state, product: action.payload, loading: false };
+    default:
+      return { ...state, loading: false };
+  }
+};
 
 const ProductPage = () => {
-  const [size, setSize] = React.useState("p");
-  const quantityRef = React.useRef(null);
+  const [size, setSize] = useState("p");
+  const quantityRef = useRef(null);
   const { slug } = useParams();
+
+  const [{ loading, error, product }, dispatch] =
+    useReducer(reducer, {
+      product: null,
+      loading: false,
+      error: ''
+    });
+
+  useEffect(() => {
+    async function fetchProducts() {
+      dispatch({ type: TYPES.FETCH_REQUEST });
+      try {
+        const response = await ClosetChicApi.getOneProduct(slug);
+        dispatch({ type: TYPES.FETCH_SUCCESS, payload: response.product });
+      } catch (error) {
+        dispatch({ type: TYPES.FETCH_ERROR, payload: error.message });
+      }
+    }
+
+    fetchProducts();
+  }, []);
 
   const updateQuantity = (increment) => {
     const convertedValue = Number(quantityRef.current?.value);
@@ -43,13 +83,13 @@ const ProductPage = () => {
       <MainContainer>
         <LeftColumn>
           <BigMiniature>
-            <img src={guy} alt="" />
+            <img src={product?.image} alt="" />
           </BigMiniature>
 
           <MiniatureArea>
             {[...Array(3)].map((_, index) => (
               <Miniature key={index}>
-                <img src={guy} alt="" />
+                <img src={product?.image} alt="" />
               </Miniature>
             ))}
 
@@ -58,15 +98,14 @@ const ProductPage = () => {
 
         <RightColumn>
           <ProductDetailArea>
-            <h4>{slug}</h4>
+            <h4>{product?.name}</h4>
             <p>
-              {[...Array(5)].map((_, i) => (
-                <IoIosStar />
-              ))}
-
+              <span>
+                {product && formatStars(product)}
+              </span>
               (5.0)
             </p>
-            <Price>R$ 2.500</Price>
+            <Price>R$ {product?.price}</Price>
           </ProductDetailArea>
 
           <SizeArea>
@@ -105,9 +144,11 @@ const ProductPage = () => {
       </MainContainer>
       <DescriptionArea>
         <h4>Descrição</h4>
-        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Odio libero non quisquam labore vitae necessitatibus, fugiat delectus sed placeat voluptatibus doloribus, autem repudiandae inventore dolores sunt temporibus obcaecati error. Repudiandae omnis, beatae nam perferendis ea ex magni quaerat voluptatem cupiditate sapiente! Tempore officia quisquam voluptatem blanditiis at eos inventore amet!</p>
+        <p>
+          {product?.description}
+        </p>
       </DescriptionArea>
-      <Footer/>
+      <Footer />
     </div>
   );
 };

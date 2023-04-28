@@ -2,6 +2,7 @@ import styled from 'styled-components';
 
 export const Product = styled.div`
   font-family:"Raleway", sans-serif;
+  color:black;
 `;
 
 export const ProductImage = styled.div`

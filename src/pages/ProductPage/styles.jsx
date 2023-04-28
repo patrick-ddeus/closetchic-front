@@ -68,6 +68,12 @@ export const ProductDetailArea = styled.div`
     font-weight:700;
     font-size:32px;
   }
+
+  span{
+    margin-right:10px;
+    margin-top:10px;
+  }
+
 `;
 
 export const SizeArea = styled.div`

@@ -15,6 +15,16 @@ const getProducts = async () => {
     }
 };
 
+const getOneProduct = async (product) => {
+    try {
+        const response = await axiosInstance.get(`/products/${product}`);
+        return response.data;
+    } catch (error) {
+        return error.data;
+    }
+}
+
 export default {
-    getProducts
+    getProducts,
+    getOneProduct
 };

@@ -5,6 +5,7 @@ import { Products } from './styles';
 import Footer from '../../components/Footer';
 import ClosetChicApi from '../../service/closetChic.api';
 import ProductCard from './ProductCard';
+import { Link } from 'react-router-dom';
 
 const TYPES = Object.freeze({
     FETCH_REQUEST: 'FETCH_REQUEST',
@@ -33,7 +34,6 @@ const StorePage = () => {
             error: ''
         });
 
-
     React.useEffect(() => {
         async function fetchProducts() {
             dispatch({ type: TYPES.FETCH_REQUEST });
@@ -54,7 +54,9 @@ const StorePage = () => {
             <Header />
             <Products>
                 {products.map((product) => (
-                    <ProductCard key={product._id} product={product} />
+                    <Link key={product._id} to={`/products/${product.slug}`}>
+                        <ProductCard product={product} />
+                    </Link>
                 ))}
             </Products>
             <Footer />
