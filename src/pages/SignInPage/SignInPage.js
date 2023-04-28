@@ -62,6 +62,9 @@ export default function SignInPage() {
                 <Link to="/sign-up">
                     <Linked>Primeira vez? Cadastre-se!</Linked>
                 </Link>
+                <Link to="/">
+                    <Linked>Continue sem login</Linked>
+                </Link>
             </SignInContainer>
         </BackgroundImage>
     )

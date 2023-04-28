@@ -90,6 +90,9 @@ export default function SignUpPage() {
         <Link to="/sign-in">
           <Linked>Já tem uma conta? Entre agora!</Linked>
         </Link>
+        <Link to="/">
+          <Linked>Continue sem login</Linked>
+        </Link>
       </SignUpContainer>
     </BackgroundImage>
   )
