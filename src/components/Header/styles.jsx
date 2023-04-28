@@ -2,12 +2,12 @@ import styled from 'styled-components';
 import "@fontsource/righteous";
 
 export const Container = styled.header`
-  margin:23px 0 26px;
-  padding:0 72px;
-  width:100%;
+  margin:23px 0 46px;
+  padding:10px 40px 30px;
   display:flex;
   justify-content: space-between;
   align-items: center;
+  border-bottom:1px solid #f0f0f0;
 
   .title{
     font-family:"Righteous", sans-serif;
@@ -17,7 +17,6 @@ export const Container = styled.header`
     position:relative;
   }
 `;
-
 
 export const List = styled.ul`
   display:flex;
