@@ -1,4 +1,4 @@
-import { useNavigate } from "react-router-dom"
+import { Link, useNavigate } from "react-router-dom"
 import { useState } from "react"
 import axios from 'axios';
 
@@ -6,12 +6,12 @@ import axios from 'axios';
 import "@fontsource/raleway"
 import "@fontsource/inter"
 import { IoMdMail, IoMdPerson, IoIosLock } from "react-icons/io";
-import { BackgroundImage, FormContainer, InputContainer, SignUpButton, SignUpContainer, TextDiv } from "./styles.jsx";
+import { BackgroundImage, FormContainer, InputContainer, Linked, SignUpButton, SignUpContainer, TextDiv } from "./styles.jsx";
 
 
 export default function SignUpPage() {
   const navigate = useNavigate()
-  const url = process.env.API_URL
+  const url = process.env.REACT_APP_API_URL
   const [form, setForm] = useState({ name: "", email: "", password: "" })
   const [isDisabled, setIsDisabled] = useState(false)
   let repeatPassword = ""
@@ -35,7 +35,7 @@ export default function SignUpPage() {
     const promise = axios.post(`http://localhost:8000/sign-up/`, form)
     setIsDisabled(true)
     promise.then((a) => {
-      navigate("/")
+      navigate("/sign-in")
       setIsDisabled(false)
     })
     promise.catch((a) => {
@@ -83,10 +83,13 @@ export default function SignUpPage() {
               title={"person"}
               height="26x"
               width="38px"
-            />          
+            />
           </InputContainer>
           <SignUpButton disabled={isDisabled} type="submit" >Cadastrar</SignUpButton>
         </FormContainer>
+        <Link to="/sign-in">
+          <Linked>Já tem uma conta? Entre agora!</Linked>
+        </Link>
       </SignUpContainer>
     </BackgroundImage>
   )

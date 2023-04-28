@@ -41,7 +41,7 @@ const Header = () => {
                 </SearchArea>
                 <IconsArea>
                     <FiShoppingCart />
-                    <FiUser />
+                    <Link to="/sign-in"><FiUser /></Link>
                 </IconsArea>
             </SearchIconsArea>
         </Container>

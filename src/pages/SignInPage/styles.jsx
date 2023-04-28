@@ -1,7 +1,7 @@
 import styled from "styled-components"
 import hangers from "../../assets/hangers.png"
 
-export const SignUpContainer = styled.section`
+export const SignInContainer = styled.section`
   height: 100vh;
   display: flex;
   flex-direction: column;
@@ -58,7 +58,7 @@ svg {
   }
 `
 
-export const SignUpButton = styled.button`
+export const SignInButton = styled.button`
   width: 466px;
   height: 92px;
   background: #007DC0;
@@ -87,6 +87,7 @@ export const BackgroundImage = styled.div`
     z-index: 0;
   }
 `;
+
 export const Linked = styled.div`
   color: white;
   z-index: 1;
