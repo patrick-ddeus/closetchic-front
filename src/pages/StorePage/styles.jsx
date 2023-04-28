@@ -1,6 +1,6 @@
 import styled from 'styled-components';
 import "@fontsource/raleway";
-
+import banner from "../../assets/men-banner.jpg";
 export const Container = styled.div`
   padding:0 72px;
 `;
@@ -29,4 +29,21 @@ export const PaginationArea = styled.div`
   justify-content:center;
   gap:5px;
   margin-bottom:100px;
+`;
+
+export const BannerMen = styled.div`
+  margin-top:-50px;
+  margin-bottom:40px;
+  height:350px;
+  background: url(${banner});
+  background-size:cover;
+  background-position:0 -20px;
+  display:flex;
+  justify-content:flex-start;
+  align-items:center;
+  font-family: "Raleway";
+  font-size:24px;
+  text-align:left;
+  padding-left:45px;
+  font-style:italic;
 `;

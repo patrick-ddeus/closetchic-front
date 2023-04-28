@@ -1,7 +1,7 @@
 import React, { useReducer, useState, useEffect } from 'react';
 import DescountBar from '../../components/DescountBar';
 import Header from '../../components/Header';
-import { Products, PaginationArea, PaginationButton } from './styles';
+import { Products, PaginationArea, PaginationButton, BannerMen } from './styles';
 import Footer from '../../components/Footer';
 import ClosetChicApi from '../../service/closetChic.api';
 import ProductCard from './ProductCard';
@@ -70,6 +70,9 @@ const StorePage = () => {
         <div>
             <DescountBar />
             <Header />
+            <BannerMen>
+                <h2>Estilo e conforto para o homem moderno</h2>
+            </BannerMen>
             {loading ? (
                 <SkeletonStore />
             ) : error ? (
