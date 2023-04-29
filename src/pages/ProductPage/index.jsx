@@ -1,4 +1,4 @@
-import React, { useReducer, useState, useRef, useEffect } from 'react';
+import React, { useReducer, useState, useRef, useEffect, useContext } from 'react';
 import {
   MainContainer,
   LeftColumn,
@@ -19,12 +19,14 @@ import {
 import Header from "../../components/Header";
 import DescountBar from '../../components/DescountBar';
 import { FiMinus, FiPlus, FiShoppingCart } from "react-icons/fi";
-import { useParams } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
 import Footer from '../../components/Footer';
 import ClosetChicApi from '../../service/closetChic.api';
 import formatStars from '../../utils/FormatStars';
 import { motion } from 'framer-motion';
 import SkeletonProductPage from './Skeleton';
+import { CartContext } from '../../contexts/cartContext.js';
+import { UserContext } from '../../contexts/userContext.js';
 
 const TYPES = Object.freeze({
   FETCH_REQUEST: 'FETCH_REQUEST',
@@ -49,6 +51,9 @@ const ProductPage = () => {
   const [size, setSize] = useState("p");
   const quantityRef = useRef(null);
   const { slug } = useParams();
+  const {cart, setCart} = useContext(CartContext);
+  const {token} = useContext(UserContext);
+  const navigate = useNavigate();
 
   const [{ loading, error, product }, dispatch] =
     useReducer(reducer, {
@@ -78,6 +83,22 @@ const ProductPage = () => {
     const quantity = newQuantity < 1 ? 1 : newQuantity;
     quantityRef.current.value = quantity;
   };
+
+  const addToCart = () => {
+    const {name,slug,image,price,_id} = product;
+    const productToAdd = {name, slug, image, price, size, product:_id, quantity:Number(quantityRef.current.value)};
+    const newCart = [...cart];
+    newCart.push(productToAdd);
+    console.log(newCart);
+    setCart(newCart)
+    if(token){
+      ClosetChicApi.postCartProducts(newCart, token)
+        .then(()=> navigate('/cart'))
+        .catch(err => alert(err.message));
+    } else{
+      navigate('/cart')
+    }
+  }
 
   return (
     <div>
@@ -158,7 +179,7 @@ const ProductPage = () => {
                   </button>
                 </Quantity>
 
-                <AddToCart>
+                <AddToCart onClick={addToCart}>
                   Adicionar ao carrinho
                   <FiShoppingCart />
                 </AddToCart>

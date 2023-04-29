@@ -3,9 +3,10 @@ import colors from "../../constants/colors.js";
 
 export const ContainerCartPage = styled.div`
   display: flex;
-  margin: auto;  
+  margin: auto;
+  height: 650px;
   h1{
-    font-family: 'Raleway';    
+    font-family: 'Raleway';
     font-weight: 600;
     font-size: 18px;
     margin-bottom: 28px;
@@ -14,7 +15,7 @@ export const ContainerCartPage = styled.div`
 export const ContainerLeft = styled.div`
   width: 59%;
   border-right: 1px solid #D9D9D9;
-  padding: 40px 46px 0px 31px;  
+  padding: 40px 46px 0px 31px;
 `
 export const ContainerRight = styled.div`
   width: 41%;
@@ -26,7 +27,7 @@ export const SectionBreak = styled.div`
   background-color: #D9D9D9;
 `
 export const TableDescriptions = styled.div`
-  padding: 0 22px 0 0px;  
+  padding: 0 24px 0 0;
   height: 50px;
   display: flex;
   justify-content: space-between;
@@ -38,9 +39,9 @@ export const TableDescriptions = styled.div`
   }
 `
 export const ContainerCart = styled.div`
-  padding-top: 38px;  
+  padding-top: 38px;
   max-height: 468px;
-  overflow-y: auto;  
+  overflow-y: auto;
   -ms-overflow-style: none;
   scrollbar-width: none;
   ::-webkit-scrollbar{
@@ -59,6 +60,7 @@ export const Product = styled.div`
   font-size: 15px;
   p{
     width: 80px;
+    text-align: center;
   }
   img{
     width: 172px;
@@ -66,20 +68,28 @@ export const Product = styled.div`
   }
   span{
     font-weight: 500;
-    width: 80px;
+    width: 63px;
     text-align: end;
   }
-  strong p{
-    font-weight: 700;
+  strong{
+    display: flex;
+    align-items: center;
+    width: 150px;
+    p{
     width: 120px;
+    width: inherit;
+    font-weight: 700;
     white-space: nowrap;
     overflow: hidden;
     text-overflow: ellipsis;
+    text-align: start;
     :hover{
       overflow: visible;
       white-space: break-spaces;
     }
+    }
   }
+  
   input{
     width: 63px;
     height: 38px;
@@ -122,9 +132,9 @@ export const Coupon = styled.div`
   }
   button{
     width: 137px;
-    height: 43px;    
+    height: 43px;
     background: ${colors.primaryColor};
-    font-family: 'Raleway';    
+    font-family: 'Raleway';
     font-weight: 600;
     font-size: 14px;
     color: #FFFFFF;
@@ -140,9 +150,9 @@ export const ContainerToCheckout = styled.div`
   align-items: center;
   button{
     width: 431px;
-    height: 57px;    
+    height: 57px;
     background: ${colors.primaryColor};
-    font-family: 'Raleway';    
+    font-family: 'Raleway';
     font-weight: 600;
     font-size: 18px;
     color: #FFFFFF;

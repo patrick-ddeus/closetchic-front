@@ -7,20 +7,23 @@ import CartPage from './pages/CartPage/index.jsx';
 import SignUpPage from './pages/SignUpPage/SignUpPage.js';
 import SignInPage from './pages/SignInPage/SignInPage.js';
 import { UserContextProvider } from './contexts/userContext.js';
+import CartContextProvider from './contexts/cartContext.js';
 
 const App = () => {
   return (
     <Router className="App">
       <UserContextProvider>
-        <Routes>
-          <Route path='/' element={<HomePage />} />
-          <Route path='/products/:slug' element={<ProductPage />} />
-          <Route path='/cart' element={<CartPage />} />
-          <Route path='/products' element={<StorePage />} />
-          <Route path='/under-construction' element={<UnderConstructionPage />} />
-          <Route path="/sign-up" element={<SignUpPage />} />
-          <Route path="/sign-in" element={<SignInPage />} />
-        </Routes>
+        <CartContextProvider>
+          <Routes>
+            <Route path='/' element={<HomePage />} />
+            <Route path='/products/:slug' element={<ProductPage />} />
+            <Route path='/cart' element={<CartPage />} />
+            <Route path='/products' element={<StorePage />} />
+            <Route path='/under-construction' element={<UnderConstructionPage />} />
+            <Route path="/sign-up" element={<SignUpPage />} />
+            <Route path="/sign-in" element={<SignInPage />} />
+          </Routes>
+        </CartContextProvider>
       </UserContextProvider>
     </Router>
   );
