@@ -1,5 +1,5 @@
 import React from 'react';
-
+import cardPayments from "../../assets/payments.png";
 import { Container, GridContainer, BrandContainer, Column, CopyrightContainer } from './styles';
 
 const Footer = () => {
@@ -35,6 +35,7 @@ const Footer = () => {
 
                 <Column>
                     <h4>Métodos de Pagamento</h4>
+                    <img src={cardPayments}/>
                 </Column>
 
             </GridContainer>

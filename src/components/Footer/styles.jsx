@@ -45,6 +45,11 @@ export const Column = styled.div`
   li{
     color:#8E8E8E;
     cursor:pointer;
+    margin-bottom:10px;
+  }
+
+  img{
+    width:150px;
   }
 `;
 
