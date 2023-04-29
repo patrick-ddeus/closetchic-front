@@ -1,5 +1,16 @@
-import React, { useRef } from 'react';
-import { Container, List, ListItem, SearchArea, IconsArea, SearchInput, SearchIconsArea } from './styles';
+import React, { useRef, useState } from 'react';
+import {
+    Container,
+    List,
+    ListItem,
+    SearchArea,
+    IconsArea,
+    SearchInput,
+    SearchIconsArea,
+    DropdownLogin,
+    DropdownInput,
+    DropdownButton
+} from './styles';
 import { IoSearchOutline } from "react-icons/io5";
 import { FiShoppingCart, FiUser } from "react-icons/fi";
 import { Link, useLocation, useNavigate } from 'react-router-dom';
@@ -8,6 +19,7 @@ const Header = () => {
     const { pathname } = useLocation();
     const navigate = useNavigate();
     const searchRef = useRef(null);
+    const [visible, setVisible] = useState(false);
 
     const handleSearch = (event) => {
         if (event.key === "Enter") {
@@ -50,7 +62,21 @@ const Header = () => {
                 </SearchArea>
                 <IconsArea>
                     <Link to={'/cart'}><FiShoppingCart /></Link>
-                    <Link to="/sign-in"><FiUser /></Link>
+                    {/* <Link to="/sign-in"><FiUser /></Link> */}
+                    <FiUser onClick={() => setVisible(!visible)} />
+                    <DropdownLogin visible={visible}>
+                        <h2>Login</h2>
+                        <label>Email</label>
+                        <DropdownInput />
+                        <label>Senha</label>
+                        <DropdownInput />
+                        <DropdownButton>
+                            Logar
+                        </DropdownButton>
+                        <div>
+                            <Link to={"/sign-up"}>Não possui conta? cadastre-se!</Link>
+                        </div>
+                    </DropdownLogin>
                 </IconsArea>
             </SearchIconsArea>
         </Container>

@@ -58,14 +58,18 @@ export const Product = styled.div`
   font-style: normal;
   font-weight: 400;
   font-size: 15px;
+  overflow:hidden;
+
   p{
     width: 80px;
     text-align: center;
   }
   img{
     width: 172px;
-    height: 174px;
+    position:relative;
+    bottom:-20px;
   }
+
   span{
     font-weight: 500;
     width: 63px;
