@@ -3,13 +3,15 @@ import { Container, Banner, BannerButton, TopSection, CardSection, Card, CardIco
 import { FiSmile, FiDollarSign, FiBox, FiTruck } from "react-icons/fi";
 import FeatureProducts from './FeatureProducts';
 import DescountBanner from './DescountBanner';
+import { useNavigate } from 'react-router-dom';
 
 const MainContent = () => {
+    const navigate = useNavigate()
     return (
         <Container>
             <Banner>
                 <h2>Eleve o seu estilo com nossa coleção de inverno</h2>
-                <BannerButton>
+                <BannerButton onClick={() => navigate('/products')}>
                     Compre Agora
                 </BannerButton>
             </Banner>
