@@ -9,6 +9,8 @@ import { Link, useSearchParams } from 'react-router-dom';
 import { motion } from 'framer-motion';
 import SkeletonStore from './Skeleton';
 
+const MAX_ITEMS_PER_PAGE = 8;
+
 const TYPES = Object.freeze({
     FETCH_REQUEST: 'FETCH_REQUEST',
     FETCH_SUCCESS: 'FETCH_SUCCESS',
@@ -37,13 +39,17 @@ const StorePage = () => {
         });
     const [searchParams, setSearchParams] = useSearchParams();
     const [page, setPage] = useState(1);
+    const [pageCount, setPageCount] = useState(1);
 
     useEffect(() => {
         async function fetchProducts() {
             dispatch({ type: TYPES.FETCH_REQUEST });
             try {
                 const response = await ClosetChicApi.getProducts(`?page=${page}`);
+
                 dispatch({ type: TYPES.FETCH_SUCCESS, payload: response.products });
+
+                setPageCount(Math.ceil(response.count / MAX_ITEMS_PER_PAGE));
             } catch (error) {
                 dispatch({ type: TYPES.FETCH_ERROR, payload: error.message });
             }
@@ -52,13 +58,15 @@ const StorePage = () => {
         async function fetchProductsByQueryString() {
             dispatch({ type: TYPES.FETCH_REQUEST });
             try {
-                const response = await ClosetChicApi.getOneProduct(`?q=${searchParams.get('q')}`);
+                const response = await ClosetChicApi.getProducts(`?q=${searchParams.get('q')}&page=${page}`);
+
                 dispatch({ type: TYPES.FETCH_SUCCESS, payload: response.products });
+
+                setPageCount(Math.ceil(response.products.length / MAX_ITEMS_PER_PAGE));
             } catch (error) {
                 dispatch({ type: TYPES.FETCH_ERROR, payload: error.message });
             }
         }
-
         if (searchParams.get('q')) {
             fetchProductsByQueryString();
         } else {
@@ -106,7 +114,7 @@ const StorePage = () => {
                             ))}
                         </Products>
                         <PaginationArea>
-                            {[...Array(2)].map((_, i) => (
+                            {[...Array(pageCount)].map((_, i) => (
                                 <PaginationButton key={i} active={i + 1 === page} onClick={() => setPage(i + 1)}>
                                     {i + 1}
                                 </PaginationButton>

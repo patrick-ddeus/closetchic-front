@@ -39,7 +39,7 @@ const reducer = (state, action) => {
     case TYPES.FETCH_SUCCESS:
       return { ...state, product: action.payload, loading: false };
     case TYPES.FETCH_ERROR:
-      return { ...state, product: action.payload, loading: false };
+      return { ...state, error: action.payload, loading: false };
     default:
       return { ...state, loading: false };
   }

@@ -8,7 +8,7 @@ const axiosInstance = axios.create({
 
 const getProducts = async (query = "") => {
     try {
-        const response = await axiosInstance.get(`/products/${query}`);
+        const response = await axiosInstance.get(`/products${query}`);
         return response.data;
     } catch (error) {
         return error.data;
@@ -34,9 +34,19 @@ const getFeaturedProducts = async () => {
     }
 }
 
+const getProductsCount = async () => {
+    try {
+        const response = await axiosInstance.get(`/products/count`);
+        return response.data;
+    } catch (error) {
+        return error.data;
+    }
+}
+
 
 export default {
     getProducts,
     getOneProduct,
-    getFeaturedProducts
+    getFeaturedProducts,
+    getProductsCount
 };
