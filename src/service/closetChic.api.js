@@ -23,7 +23,7 @@ const getOneProduct = async (product) => {
     } catch (error) {
         return error.data;
     }
-}
+};
 
 const getFeaturedProducts = async () => {
     try {
@@ -32,7 +32,16 @@ const getFeaturedProducts = async () => {
     } catch (error) {
         return error.data;
     }
-}
+};
+
+const getCartProducts = async (token) => {
+    try {
+        const response = await axiosInstance.get(`/cart`, createHeader(token));
+        return response.data.userCart;
+    } catch (error) {
+        return error.data;
+    }
+};
 
 const getProductsCount = async () => {
     try {
@@ -41,12 +50,29 @@ const getProductsCount = async () => {
     } catch (error) {
         return error.data;
     }
-}
+};
 
+const postCartProducts = async (products, token) => {
+    try {
+        await axiosInstance.post(`/cart`, { products }, createHeader(token));
+    } catch (error) {
+        return error.data;
+    }
+};
+
+const createHeader = (token) => {
+    return {
+        headers: {
+            Authorization: `Bearer ${token}`
+        }
+    };
+};
 
 export default {
     getProducts,
     getOneProduct,
     getFeaturedProducts,
-    getProductsCount
+    getProductsCount,
+    getCartProducts,
+    postCartProducts
 };

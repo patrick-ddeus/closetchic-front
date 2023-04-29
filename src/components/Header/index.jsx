@@ -49,7 +49,7 @@ const Header = () => {
                     <SearchInput type="text" placeholder='Pesquisar' ref={searchRef} onKeyUp={handleSearch} />
                 </SearchArea>
                 <IconsArea>
-                    <FiShoppingCart />
+                    <Link to={'/cart'}><FiShoppingCart /></Link>
                     <Link to="/sign-in"><FiUser /></Link>
                 </IconsArea>
             </SearchIconsArea>
