@@ -44,7 +44,9 @@ export default function CartPage() {
     const newCart = [...cart];
     const newQuantity = Number(e.target.value);
     newCart[index].quantity = newQuantity;
+    
     setCart(newCart);
+
     if (newQuantity >= 1) {
       setSubtotal(getSubtotal(newCart));
       await closetChicApi.postCartProducts(newCart, token);

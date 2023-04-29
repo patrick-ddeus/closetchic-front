@@ -51,8 +51,8 @@ const ProductPage = () => {
   const [size, setSize] = useState("p");
   const quantityRef = useRef(null);
   const { slug } = useParams();
-  const {cart, setCart} = useContext(CartContext);
-  const {token} = useContext(UserContext);
+  const { cart, setCart } = useContext(CartContext);
+  const { token } = useContext(UserContext);
   const navigate = useNavigate();
 
   const [{ loading, error, product }, dispatch] =
@@ -81,25 +81,38 @@ const ProductPage = () => {
     const convertedValue = Number(quantityRef.current?.value);
     const newQuantity = increment ? convertedValue + 1 : convertedValue - 1;
     const quantity = newQuantity < 1 ? 1 : newQuantity;
+
     quantityRef.current.value = quantity;
   };
 
   const addToCart = () => {
-    const {name,slug,image,price,_id} = product;
-    const productToAdd = {name, slug, image, price, size, product:_id, quantity:Number(quantityRef.current.value)};
+    const { name, slug, image, price, _id } = product;
+    const quantity = Number(quantityRef.current.value);
+    const productToAdd = { name, slug, image, price, size, product: _id, quantity };
     const newCart = [...cart];
-    newCart.push(productToAdd);
-    console.log(newCart);
-    setCart(newCart)
-    if(token){
-      ClosetChicApi.postCartProducts(newCart, token)
-        .then(()=> navigate('/cart'))
-        .catch(err => alert(err.message));
-    } else{
-      navigate('/cart')
-    }
-  }
 
+    const productIndex = findProductIndex(newCart, productToAdd);
+    console.log(productIndex)
+    if (productIndex > -1) {
+      newCart[productIndex].quantity += quantity;
+    } else {
+      newCart.push(productToAdd);
+    }
+
+    setCart(newCart);
+
+    token
+      ? ClosetChicApi.postCartProducts(newCart, token)
+        .then(() => navigate('/cart'))
+        .catch(err => alert(err.message))
+      : navigate('/cart');
+  };
+
+  const findProductIndex = (cart, productToAdd) => {
+    return cart.findIndex(({ product: productId, size: productSize }) =>
+      productId === productToAdd.product && productSize === productToAdd.size
+    );
+  };
   return (
     <div>
       <DescountBar />
