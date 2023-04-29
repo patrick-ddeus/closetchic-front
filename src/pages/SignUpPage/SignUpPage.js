@@ -28,14 +28,17 @@ export default function SignUpPage() {
   });
   const [form, setForm] = useState({ name: "", email: "", password: "" });
   const [isDisabled, setIsDisabled] = useState(false);
-  let repeatPassword = "";
+  const [repeatPassword, setRepeatPassword] = useState("")
+
 
   function handleChange(event) {
     const { name, value } = event.target;
     if (name === "repeatPassword") {
-      repeatPassword = value;
+      setRepeatPassword(value)
+      console.log(repeatPassword)
     } else {
       setForm({ ...form, [name]: value });
+      console.log(form)
     }
 
     if (value === "" || !event.target.validity.valid) {
@@ -87,6 +90,8 @@ export default function SignUpPage() {
 
   function signUp(e) {
     e.preventDefault();
+    console.log("form",form.password)
+    console.log("repeat",repeatPassword)
     if (form.password !== repeatPassword) {
       return alert("Senhas diferentes");
     }
