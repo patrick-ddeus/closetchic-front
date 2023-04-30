@@ -5,10 +5,10 @@ import axios from 'axios';
 import { BackgroundImage, FormContainer, InputContainer, Linked, SignInButton, SignInContainer, TextDiv } from "./styles.jsx";
 import { IoIosLock, IoMdMail } from "react-icons/io";
 import { motion } from "framer-motion";
+import ClosetChicApi from "../../service/closetChic.api.js";
 
 export default function SignInPage() {
     const navigate = useNavigate();
-    const url = process.env.REACT_APP_API_URL;
     const emailRef = useRef(null);
     const passwordRef = useRef(null);
     const [form, setForm] = useState({ email: "", password: "" });
@@ -18,6 +18,7 @@ export default function SignInPage() {
         email: null,
         password: null
     });
+
     function handleChange(event) {
         setForm({ ...form, [event.target.name]: event.target.value });
         const { name, value } = event.target;
@@ -68,22 +69,20 @@ export default function SignInPage() {
         }
     }
 
-    function signIn(e) {
+    async function signIn(e) {
         e.preventDefault();
-        const promise = axios.post(`http://localhost:8000/sign-in/`, form);
         setIsDisabled(true);
-        promise.then((a) => {
+        try {
+            const response = await ClosetChicApi.authenticateUser(form);
             navigate("/");
+            setToken(response.token);
+            setName(response.name);
+            localStorage.setItem("token", response.token);
+        } catch (error) {
+            alert(error.message);
+        } finally {
             setIsDisabled(false);
-            setToken(a.data.token);
-            setName(a.data.name);
-            localStorage.setItem("token", a.data.token);
-        });
-        promise.catch((a) => {
-            alert(a.message);
-            setIsDisabled(false);
-        });
-
+        }
     }
     return (
         <BackgroundImage>

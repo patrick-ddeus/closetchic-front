@@ -68,11 +68,31 @@ const createHeader = (token) => {
     };
 };
 
+const authenticateUser = async (body) => {
+    try {
+       const response = await axiosInstance.post(`/sign-in`, body);
+       return response.data
+    } catch (error) {
+        return error.data;
+    }
+}
+
+const registerUser = async (body) => {
+    try {
+       const response = await axiosInstance.post(`/sign-up`, body);
+       return response.data
+    } catch (error) {
+        return error.data;
+    }
+}
+
 export default {
     getProducts,
     getOneProduct,
     getFeaturedProducts,
     getProductsCount,
     getCartProducts,
-    postCartProducts
+    postCartProducts,
+    authenticateUser,
+    registerUser
 };

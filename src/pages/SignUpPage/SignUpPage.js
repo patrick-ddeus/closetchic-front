@@ -14,6 +14,7 @@ import {
   TextDiv,
 } from "./styles.jsx";
 import { motion } from "framer-motion";
+import ClosetChicApi from "../../service/closetChic.api.js";
 
 export default function SignUpPage() {
   const navigate = useNavigate();
@@ -30,8 +31,6 @@ export default function SignUpPage() {
   const [form, setForm] = useState({ name: "", email: "", password: "" });
   const [isDisabled, setIsDisabled] = useState(false);
   const [repeatPassword, setRepeatPassword] = useState("");
-  const url = process.env.REACT_APP_API_URL;
-
 
   function handleChange(event) {
     const { name, value } = event.target;
@@ -91,7 +90,7 @@ export default function SignUpPage() {
     }
   }
 
-  function signUp(e) {
+  async function signUp(e) {
     e.preventDefault();
 
     if (form.password !== repeatPassword) {
@@ -108,16 +107,16 @@ export default function SignUpPage() {
       }
     });
 
-    const promise = axios.post(`http://localhost:8000/sign-up/`, form);
     setIsDisabled(true);
-    promise.then((a) => {
+
+    try {
+      await ClosetChicApi.registerUser(form);
       navigate("/sign-in");
+    } catch (error) {
+      alert(error.message);
+    } finally {
       setIsDisabled(false);
-    });
-    promise.catch((a) => {
-      alert(a.message);
-      setIsDisabled(false);
-    });
+    }
   }
 
   function getInputStyle(inputName) {
