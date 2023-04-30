@@ -13,13 +13,14 @@ import {
   SignUpContainer,
   TextDiv,
 } from "./styles.jsx";
+import { motion } from "framer-motion";
 
 export default function SignUpPage() {
   const navigate = useNavigate();
-  const nameRef = useRef(null)
-  const emailRef = useRef(null)
-  const passwordRef = useRef(null)
-  const repPasswordRef = useRef(null)
+  const nameRef = useRef(null);
+  const emailRef = useRef(null);
+  const passwordRef = useRef(null);
+  const repPasswordRef = useRef(null);
   const [invalidInputs, setInvalidInputs] = useState({
     name: null,
     email: null,
@@ -28,21 +29,21 @@ export default function SignUpPage() {
   });
   const [form, setForm] = useState({ name: "", email: "", password: "" });
   const [isDisabled, setIsDisabled] = useState(false);
-  const [repeatPassword, setRepeatPassword] = useState("")
+  const [repeatPassword, setRepeatPassword] = useState("");
 
 
   function handleChange(event) {
     const { name, value } = event.target;
     if (name === "repeatPassword") {
-      setRepeatPassword(value)
-      console.log(repeatPassword)
+      setRepeatPassword(value);
+      console.log(repeatPassword);
     } else {
       setForm({ ...form, [name]: value });
-      console.log(form)
+      console.log(form);
     }
 
     if (value === "" || !event.target.validity.valid) {
-      switch(name){
+      switch (name) {
         case "name":
           nameRef.current.focus();
           break;
@@ -55,7 +56,10 @@ export default function SignUpPage() {
         case "repeatPassword":
           repPasswordRef.current.focus();
           break;
+        default:
+          return;
       }
+
       // adiciona o input inválido ao estado
       setInvalidInputs((prevInvalidInputs) => ({
         ...prevInvalidInputs,
@@ -73,7 +77,7 @@ export default function SignUpPage() {
   function handleBlur(event) {
     const { name, value } = event.target;
     if (value === "" || !event.target.validity.valid) {
-    
+
       // adiciona o input inválido ao estado
       setInvalidInputs((prevInvalidInputs) => ({
         ...prevInvalidInputs,
@@ -90,8 +94,7 @@ export default function SignUpPage() {
 
   function signUp(e) {
     e.preventDefault();
-    console.log("form",form.password)
-    console.log("repeat",repeatPassword)
+
     if (form.password !== repeatPassword) {
       return alert("Senhas diferentes");
     }
@@ -121,92 +124,116 @@ export default function SignUpPage() {
   function getInputStyle(inputName) {
     return invalidInputs[inputName] ? { border: "2px solid red" } : {};
   }
+
   return (
     <BackgroundImage>
-      <SignUpContainer>
-        <TextDiv>Cadastre-se</TextDiv>
-        <FormContainer onSubmit={signUp}>
-          <InputContainer>
-            <input
-              ref={nameRef}
-              placeholder="Nome"
-              type="text"
-              name={"name"}
-              onChange={handleChange}
-              disabled={isDisabled}
-              style={getInputStyle("name")}
-              onBlur={handleBlur} />
-            <IoMdPerson
-              color={'#00000'}
-              title={"person"}
-              height="26x"
-              width="38px"
-            />
-          </InputContainer>
-          <InputContainer>
-            <input
-              ref={emailRef}
-              placeholder="E-mail"
-              type="email"
-              name={"email"}
-              onChange={handleChange}
-              disabled={isDisabled}
-              style={getInputStyle("email")}
-              onBlur={handleBlur} />
-            <IoMdMail
-              color={'#00000'}
-              title={"person"}
-              height="26x"
-              width="38px"
-            />
-          </InputContainer>
-          <InputContainer>
-            <input
-              ref={passwordRef}
-              placeholder="Senha"
-              type="password"
-              autoComplete="new-password"
-              name={"password"}
-              onChange={handleChange}
-              disabled={isDisabled}
-              style={getInputStyle("password")}
-              onBlur={handleBlur} />
-            <IoIosLock
-              color={'#00000'}
-              title={"person"}
-              height="26x"
-              width="38px"
-            />
-          </InputContainer>
-          <InputContainer>
-            <input
-              ref={repPasswordRef}
-              placeholder="Confirme a senha"
-              type="password"
-              autoComplete="new-password"
-              name={"repeatPassword"}
-              onChange={handleChange}
-              disabled={isDisabled}
-              style={getInputStyle("repeatPassword")}
-              onBlur={handleBlur} />
-            <IoIosLock
-              color={'#00000'}
-              title={"person"}
-              height="26x"
-              width="38px"
-            />
-          </InputContainer>
-          <SignUpButton disabled={isDisabled} type="submit" >Cadastrar</SignUpButton>
-        </FormContainer>
-        <Link to="/sign-in">
-          <Linked>Já tem uma conta? Entre agora!</Linked>
-        </Link>
-        <Link to="/">
-          <Linked>Continue sem login</Linked>
-        </Link>
-      </SignUpContainer>
+      <motion.div
+        initial={{
+          opacity: 0,
+          y:-100,
+          duration: 0.5,
+          ease: [0.43, 0.13, 0.23, 0.96]
+        }}
+        animate={{
+          opacity: 1,
+          y:0,
+          transition: {
+            delay: 0.1,
+            duration: 0.5,
+            ease: [0.43, 0.13, 0.23, 0.96]
+          }
+        }}
+        exit={{
+          opacity: 0,
+          y:-100,
+          duration: 0.5,
+          ease: [0.43, 0.13, 0.23, 0.96]
+        }}>
+        <SignUpContainer>
+          <TextDiv>Cadastre-se</TextDiv>
+          <FormContainer onSubmit={signUp}>
+            <InputContainer>
+              <input
+                ref={nameRef}
+                placeholder="Nome"
+                type="text"
+                name={"name"}
+                onChange={handleChange}
+                disabled={isDisabled}
+                style={getInputStyle("name")}
+                onBlur={handleBlur} />
+              <IoMdPerson
+                color={'#00000'}
+                title={"person"}
+                height="26x"
+                width="38px"
+              />
+            </InputContainer>
+            <InputContainer>
+              <input
+                ref={emailRef}
+                placeholder="E-mail"
+                type="email"
+                name={"email"}
+                onChange={handleChange}
+                disabled={isDisabled}
+                style={getInputStyle("email")}
+                onBlur={handleBlur} />
+              <IoMdMail
+                color={'#00000'}
+                title={"person"}
+                height="26x"
+                width="38px"
+              />
+            </InputContainer>
+            <InputContainer>
+              <input
+                ref={passwordRef}
+                placeholder="Senha"
+                type="password"
+                autoComplete="new-password"
+                name={"password"}
+                onChange={handleChange}
+                disabled={isDisabled}
+                style={getInputStyle("password")}
+                onBlur={handleBlur} />
+              <IoIosLock
+                color={'#00000'}
+                title={"person"}
+                height="26x"
+                width="38px"
+              />
+            </InputContainer>
+            <InputContainer>
+              <input
+                ref={repPasswordRef}
+                placeholder="Confirme a senha"
+                type="password"
+                autoComplete="new-password"
+                name={"repeatPassword"}
+                onChange={handleChange}
+                disabled={isDisabled}
+                style={getInputStyle("repeatPassword")}
+                onBlur={handleBlur} />
+              <IoIosLock
+                color={'#00000'}
+                title={"person"}
+                height="26x"
+                width="38px"
+              />
+            </InputContainer>
+            <SignUpButton disabled={isDisabled} type="submit" >Cadastrar</SignUpButton>
+          </FormContainer>
+          <Link to="/sign-in">
+            <Linked>Já tem uma conta? Entre agora!</Linked>
+          </Link>
+          <Link to="/">
+            <Linked>Continue sem login</Linked>
+          </Link>
+        </SignUpContainer>
+      </motion.div >
     </BackgroundImage>
-  )
+  );
 }
 
 

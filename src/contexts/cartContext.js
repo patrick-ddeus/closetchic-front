@@ -5,7 +5,8 @@ import { UserContext } from "./userContext.js";
 export const CartContext = createContext();
 
 export default function CartContextProvider({ children }) {
-  const [cart, setCart] = useState([]);
+  const initValue = JSON.parse(localStorage.getItem("cart")) || []
+  const [cart, setCart] = useState(initValue);
   const [coupon, setCoupon] = useState({ name: "", value: 0 });
   const { token } = useContext(UserContext);
 

@@ -78,6 +78,7 @@ export default function CartPage() {
     const newCart = [...cart];
     newCart.splice(index, 1);
     setCart(newCart);
+    localStorage.setItem("cart", JSON.stringify(newCart));
     setSubtotal(getSubtotal(newCart));
     closetChicApi.postCartProducts(newCart, token);
   }

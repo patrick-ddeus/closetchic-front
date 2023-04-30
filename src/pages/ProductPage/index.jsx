@@ -92,7 +92,7 @@ const ProductPage = () => {
     const newCart = [...cart];
 
     const productIndex = findProductIndex(newCart, productToAdd);
-    console.log(productIndex)
+   
     if (productIndex > -1) {
       newCart[productIndex].quantity += quantity;
     } else {
@@ -100,7 +100,8 @@ const ProductPage = () => {
     }
 
     setCart(newCart);
-
+    localStorage.setItem("cart", JSON.stringify(newCart));
+    
     token
       ? ClosetChicApi.postCartProducts(newCart, token)
         .then(() => navigate('/cart'))
