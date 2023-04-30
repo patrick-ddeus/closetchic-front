@@ -30,16 +30,15 @@ export default function SignUpPage() {
   const [form, setForm] = useState({ name: "", email: "", password: "" });
   const [isDisabled, setIsDisabled] = useState(false);
   const [repeatPassword, setRepeatPassword] = useState("");
+  const url = process.env.REACT_APP_API_URL;
 
 
   function handleChange(event) {
     const { name, value } = event.target;
     if (name === "repeatPassword") {
       setRepeatPassword(value);
-      console.log(repeatPassword);
     } else {
       setForm({ ...form, [name]: value });
-      console.log(form);
     }
 
     if (value === "" || !event.target.validity.valid) {
@@ -116,7 +115,7 @@ export default function SignUpPage() {
       setIsDisabled(false);
     });
     promise.catch((a) => {
-      alert(a);
+      alert(a.message);
       setIsDisabled(false);
     });
   }
@@ -130,13 +129,13 @@ export default function SignUpPage() {
       <motion.div
         initial={{
           opacity: 0,
-          y:-100,
+          y: -100,
           duration: 0.5,
           ease: [0.43, 0.13, 0.23, 0.96]
         }}
         animate={{
           opacity: 1,
-          y:0,
+          y: 0,
           transition: {
             delay: 0.1,
             duration: 0.5,
@@ -145,7 +144,7 @@ export default function SignUpPage() {
         }}
         exit={{
           opacity: 0,
-          y:-100,
+          y: -100,
           duration: 0.5,
           ease: [0.43, 0.13, 0.23, 0.96]
         }}>
