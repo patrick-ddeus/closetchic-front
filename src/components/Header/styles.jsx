@@ -118,15 +118,27 @@ export const DropdownLogin = styled.div`
   padding:20px;
   width:280px;
   overflow: hidden;
-  height:${({ visible }) => visible ? "220px" : "0"};
+  height:${({ visible }) => visible ? "160px" : "0"};
   opacity:${({ visible }) => visible ? "1" : "0"};
   z-index:${({ visible }) => visible ? "1" : "-2"};
   transition:all .4s ease-in-out;
 
+  display:flex;
+  align-items:center;
+  justify-content: center;
+  flex-direction: column;
+  
   h2{
-    margin-top:-5px;
+    margin-top:-10px;
+    margin-bottom:10px;
     font-size:16px;
     font-weight:600;
+  }
+
+  p{
+    margin-top:5px;
+    font-size:14px;
+    color:#616161;
   }
 
   label{
@@ -141,7 +153,7 @@ export const DropdownLogin = styled.div`
   }
 
   a{
-    font-size:13px;
+    font-size:14px;
     color:#616161;
     display:inline-block;
   }

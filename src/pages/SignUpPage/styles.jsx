@@ -31,6 +31,7 @@ export const FormContainer = styled.form`
   flex-direction: column;
   gap: 10px;
   z-index:1;
+
   input{
     width: 326px;
     padding:16px;
@@ -43,19 +44,32 @@ export const FormContainer = styled.form`
     border:none;
     font-family: 'Inter';
     border-radius:5px;
+    outline:0;
+    transition:all .2s ease;
+
+    &:focus{
+      transform:scale(1.02);
+    }
   }
+
   input::placeholder {
     color: #000000;
 }
 `;
 export const InputContainer = styled.div`
-position:relative;
-svg {
+  position:relative;
+
+  input:focus + svg{
+    font-size:27px;
+  }
+
+  svg {
     position: absolute;
     left: 22px;
     top: 50%;
     transform: translateY(-50%);
     font-size: 25px;
+    transition:all .2s ease;
   }
 `;
 

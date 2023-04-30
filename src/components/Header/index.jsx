@@ -7,9 +7,7 @@ import {
     IconsArea,
     SearchInput,
     SearchIconsArea,
-    DropdownLogin,
-    DropdownInput,
-    DropdownButton
+    DropdownLogin as Dropdown,
 } from './styles';
 import { IoSearchOutline } from "react-icons/io5";
 import { FiShoppingCart, FiUser } from "react-icons/fi";
@@ -37,16 +35,19 @@ const Header = () => {
                         Comprar
                     </Link>
                 </ListItem>
+
                 <ListItem active={false}>
                     <Link to="/under-construction">
                         Mais Procurados
                     </Link>
                 </ListItem>
+
                 <ListItem active={false}>
                     <Link to="/under-construction">
                         Lançamentos
                     </Link>
                 </ListItem>
+
                 <ListItem active={false}>
                     <Link to="/under-construction">
                         Marcas
@@ -54,29 +55,27 @@ const Header = () => {
                 </ListItem>
             </List>
             <SearchIconsArea>
+                
                 <SearchArea>
                     <div>
                         <IoSearchOutline />
                     </div>
                     <SearchInput type="text" placeholder='Pesquisar' ref={searchRef} onKeyUp={handleSearch} />
                 </SearchArea>
+
                 <IconsArea>
                     <Link to={'/cart'}><FiShoppingCart /></Link>
-                    {/* <Link to="/sign-in"><FiUser /></Link> */}
                     <FiUser onClick={() => setVisible(!visible)} />
-                    <DropdownLogin visible={visible}>
-                        <h2>Login</h2>
-                        <label>Email</label>
-                        <DropdownInput />
-                        <label>Senha</label>
-                        <DropdownInput />
-                        <DropdownButton>
-                            Logar
-                        </DropdownButton>
+
+                    <Dropdown visible={visible}>
+                        <h2>Você precisa estar logado!</h2>
+                        <Link to={"/sign-in"}>Faça login</Link>
+                        <p>ou</p>
                         <div>
-                            <Link to={"/sign-up"}>Não possui conta? cadastre-se!</Link>
+                            <Link to={"/sign-up"}>Não possui uma conta? cadastre-se!</Link>
                         </div>
-                    </DropdownLogin>
+                    </Dropdown>
+
                 </IconsArea>
             </SearchIconsArea>
         </Container>

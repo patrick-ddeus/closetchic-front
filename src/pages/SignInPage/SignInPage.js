@@ -48,7 +48,7 @@ export default function SignInPage() {
         }
     }
     function getInputStyle(inputName) {
-        return invalidInputs[inputName] ? { border: "2px solid red" } : {};
+        return invalidInputs[inputName] ? { boxShadow: "0 0 0 2px red", backgroundColor: "#F9DDD8" } : {};
     }
 
     function handleBlur(event) {
@@ -73,11 +73,11 @@ export default function SignInPage() {
         e.preventDefault();
         setIsDisabled(true);
         try {
-            const response = await ClosetChicApi.authenticateUser(form);
+            const { token, name } = await ClosetChicApi.authenticateUser(form);
             navigate("/");
-            setToken(response.token);
-            setName(response.name);
-            localStorage.setItem("token", response.token);
+            setToken(token);
+            setName(name);
+            localStorage.setItem("userinfo", JSON.stringify({ token, name }));
         } catch (error) {
             alert(error.message);
         } finally {

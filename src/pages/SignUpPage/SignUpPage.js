@@ -120,7 +120,7 @@ export default function SignUpPage() {
   }
 
   function getInputStyle(inputName) {
-    return invalidInputs[inputName] ? { border: "2px solid red" } : {};
+    return invalidInputs[inputName] ? { boxShadow: "0 0 0 2px red", backgroundColor: "#F9DDD8" } : {};
   }
 
   return (
