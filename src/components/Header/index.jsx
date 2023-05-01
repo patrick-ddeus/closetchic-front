@@ -70,7 +70,7 @@ const Header = () => {
                 <IconsArea>
                     <Link to={'/cart'}>
                         <FiShoppingCart />
-                        <span>{getTotalItemsFromCart()}</span>
+                        <span>{getTotalItemsFromCart() || 0}</span>
                     </Link>
                     {token ?
                         <img

@@ -76,6 +76,7 @@ export const InputContainer = styled.div`
 export const SignUpButton = styled.button`
   width: 326px;
   padding:16px;
+  height:56px;
   background: #007DC0;
   font-style: normal;
   font-weight: 500;

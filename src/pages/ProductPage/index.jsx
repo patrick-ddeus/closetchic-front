@@ -89,6 +89,7 @@ const ProductPage = () => {
     const { name, slug, image, price, _id } = product;
     const quantity = Number(quantityRef.current.value);
     const productToAdd = { name, slug, image, price, size, product: _id, quantity };
+    console.log(cart)
     const newCart = [...cart];
 
     const productIndex = findProductIndex(newCart, productToAdd);
@@ -108,7 +109,7 @@ const ProductPage = () => {
   };
 
   const findProductIndex = (cart, productToAdd) => {
-    return cart.findIndex(({ product: productId, size: productSize }) =>
+    return cart?.findIndex(({ product: productId, size: productSize }) =>
       productId === productToAdd.product && productSize === productToAdd.size
     );
   };

@@ -1,23 +1,24 @@
 import { Link, useNavigate } from "react-router-dom";
 import { UserContext } from "../../contexts/userContext.js";
 import { useState, useContext, useRef } from "react";
-import axios from 'axios';
 import { BackgroundImage, FormContainer, InputContainer, Linked, SignInButton, SignInContainer, TextDiv } from "./styles.jsx";
 import { IoIosLock, IoMdMail } from "react-icons/io";
 import { motion } from "framer-motion";
 import ClosetChicApi from "../../service/closetChic.api.js";
+import ButtonLoader from "../../components/ButtonLoader/index.jsx";
 
 export default function SignInPage() {
     const navigate = useNavigate();
     const emailRef = useRef(null);
     const passwordRef = useRef(null);
     const [form, setForm] = useState({ email: "", password: "" });
-    const [isDisabled, setIsDisabled] = useState(false);
+    const [isLoading, setIsLoading] = useState(false);
     const [invalidInputs, setInvalidInputs] = useState({
         email: null,
         password: null
     });
     const { setToken, setName } = useContext(UserContext);
+
 
     function handleChange(event) {
         setForm({ ...form, [event.target.name]: event.target.value });
@@ -69,9 +70,25 @@ export default function SignInPage() {
         }
     }
 
+    const handleValidInputs = () => {
+        let isValid = true;
+        Object.entries(form).forEach(([name, value]) => {
+            if (value === "") {
+                setInvalidInputs((prevInvalidInputs) => ({
+                    ...prevInvalidInputs,
+                    [name]: true,
+                }));
+                isValid = false;
+            }
+        });
+        return isValid;
+    };
+
     async function signIn(e) {
         e.preventDefault();
-        setIsDisabled(true);
+        if (!handleValidInputs()) return;
+
+        setIsLoading(true);
         try {
             const { token, name } = await ClosetChicApi.authenticateUser(form);
             navigate("/");
@@ -79,9 +96,9 @@ export default function SignInPage() {
             setName(name);
             localStorage.setItem("userinfo", JSON.stringify({ token, name }));
         } catch (error) {
-            alert(error.message);
+            console.error(error);
         } finally {
-            setIsDisabled(false);
+            setIsLoading(false);
         }
     }
     return (
@@ -116,7 +133,7 @@ export default function SignInPage() {
                                 ref={emailRef}
                                 placeholder="E-mail"
                                 type="email"
-                                disabled={isDisabled}
+                                disabled={isLoading}
                                 name={"email"}
                                 onChange={handleChange}
                                 onBlur={handleBlur}
@@ -134,7 +151,7 @@ export default function SignInPage() {
                                 placeholder="Senha"
                                 type="password"
                                 autoComplete="new-password"
-                                disabled={isDisabled}
+                                disabled={isLoading}
                                 name={"password"}
                                 onChange={handleChange}
                                 onBlur={handleBlur}
@@ -146,7 +163,11 @@ export default function SignInPage() {
                                 width="38px"
                             />
                         </InputContainer>
-                        <SignInButton disabled={isDisabled} type="submit">Entrar</SignInButton>
+                        <SignInButton
+                            disabled={isLoading}
+                            type="submit">
+                            {isLoading ? <ButtonLoader /> : "Entrar"}
+                        </SignInButton>
                     </FormContainer>
                     <Link to="/sign-up">
                         <Linked>Primeira vez? Cadastre-se!</Linked>

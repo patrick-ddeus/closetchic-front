@@ -1,6 +1,6 @@
 import { Link, useNavigate } from "react-router-dom";
 import { useState, useRef } from "react";
-import axios from "axios";
+import axios, { formToJSON } from "axios";
 import "@fontsource/raleway";
 import "@fontsource/inter";
 import { IoMdMail, IoMdPerson, IoIosLock } from "react-icons/io";
@@ -15,6 +15,7 @@ import {
 } from "./styles.jsx";
 import { motion } from "framer-motion";
 import ClosetChicApi from "../../service/closetChic.api.js";
+import ButtonLoader from "../../components/ButtonLoader/index.jsx";
 
 export default function SignUpPage() {
   const navigate = useNavigate();
@@ -28,17 +29,12 @@ export default function SignUpPage() {
     password: null,
     repeatPassword: null,
   });
-  const [form, setForm] = useState({ name: "", email: "", password: "" });
-  const [isDisabled, setIsDisabled] = useState(false);
-  const [repeatPassword, setRepeatPassword] = useState("");
+  const [form, setForm] = useState({ name: "", email: "", password: "", repeatPassword: "" });
+  const [isLoading, setIsLoading] = useState(false);
 
   function handleChange(event) {
     const { name, value } = event.target;
-    if (name === "repeatPassword") {
-      setRepeatPassword(value);
-    } else {
-      setForm({ ...form, [name]: value });
-    }
+    setForm({ ...form, [name]: value });
 
     if (value === "" || !event.target.validity.valid) {
       switch (name) {
@@ -90,32 +86,38 @@ export default function SignUpPage() {
     }
   }
 
-  async function signUp(e) {
-    e.preventDefault();
-
-    if (form.password !== repeatPassword) {
-      return alert("Senhas diferentes");
-    }
-
-    // verifica se há campos vazios e os marca como inválidos
+  const handleValidInputs = () => {
+    let isValid = true;
     Object.entries(form).forEach(([name, value]) => {
       if (value === "") {
         setInvalidInputs((prevInvalidInputs) => ({
           ...prevInvalidInputs,
           [name]: true,
         }));
+        isValid = false;
       }
     });
+    return isValid;
+  };
 
-    setIsDisabled(true);
+  async function signUp(e) {
+    e.preventDefault();
+    // verifica se há campos vazios e os marca como inválidos
+    if (!handleValidInputs()) return;
+
+    if (form.password !== form.repeatPassword) {
+      return alert("Senhas diferentes");
+    }
+
+    setIsLoading(true);
 
     try {
-      await ClosetChicApi.registerUser(form);
+      await ClosetChicApi.registerUser({ name: form.name, email: form.email, password: form.password });
       navigate("/sign-in");
     } catch (error) {
       alert(error.message);
     } finally {
-      setIsDisabled(false);
+      setIsLoading(false);
     }
   }
 
@@ -156,8 +158,9 @@ export default function SignUpPage() {
                 placeholder="Nome"
                 type="text"
                 name={"name"}
+                value={form.name}
                 onChange={handleChange}
-                disabled={isDisabled}
+                disabled={isLoading}
                 style={getInputStyle("name")}
                 onBlur={handleBlur} />
               <IoMdPerson
@@ -172,9 +175,10 @@ export default function SignUpPage() {
                 ref={emailRef}
                 placeholder="E-mail"
                 type="email"
+                value={form.email}
                 name={"email"}
                 onChange={handleChange}
-                disabled={isDisabled}
+                disabled={isLoading}
                 style={getInputStyle("email")}
                 onBlur={handleBlur} />
               <IoMdMail
@@ -189,10 +193,11 @@ export default function SignUpPage() {
                 ref={passwordRef}
                 placeholder="Senha"
                 type="password"
+                value={form.password}
                 autoComplete="new-password"
                 name={"password"}
                 onChange={handleChange}
-                disabled={isDisabled}
+                disabled={isLoading}
                 style={getInputStyle("password")}
                 onBlur={handleBlur} />
               <IoIosLock
@@ -207,10 +212,11 @@ export default function SignUpPage() {
                 ref={repPasswordRef}
                 placeholder="Confirme a senha"
                 type="password"
+                value={form.repeatPassword}
                 autoComplete="new-password"
                 name={"repeatPassword"}
                 onChange={handleChange}
-                disabled={isDisabled}
+                disabled={isLoading}
                 style={getInputStyle("repeatPassword")}
                 onBlur={handleBlur} />
               <IoIosLock
@@ -220,7 +226,9 @@ export default function SignUpPage() {
                 width="38px"
               />
             </InputContainer>
-            <SignUpButton disabled={isDisabled} type="submit" >Cadastrar</SignUpButton>
+            <SignUpButton disabled={isLoading} type="submit" >
+              {isLoading ? <ButtonLoader /> : "Cadastrar"}
+            </SignUpButton>
           </FormContainer>
           <Link to="/sign-in">
             <Linked>Já tem uma conta? Entre agora!</Linked>

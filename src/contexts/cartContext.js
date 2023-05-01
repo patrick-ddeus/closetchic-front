@@ -4,8 +4,9 @@ import { UserContext } from "./userContext.js";
 
 export const CartContext = createContext();
 
+const initValue = JSON.parse(localStorage.getItem("cart")) || [];
+
 export default function CartContextProvider({ children }) {
-  const initValue = JSON.parse(localStorage.getItem("cart")) || [];
   const [cart, setCart] = useState(initValue);
   const [coupon, setCoupon] = useState({ name: "", value: 0 });
   const { token } = useContext(UserContext);
@@ -15,7 +16,6 @@ export default function CartContextProvider({ children }) {
       if (token) {
         if (cart && cart.length === 0) {
           const { products } = await closetChicApi.getCartProducts(token);
-          console.log(products);
           setCart(products);
         } else {
           closetChicApi.postCartProducts(cart, token);

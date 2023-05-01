@@ -61,7 +61,7 @@ const CheckoutPage = () => {
     }, []);
 
     const handleValidInputs = () => {
-        let isValid = '';
+        let isValid = true;
         for (let [key, value] of Object.entries(form)) {
             if (key !== "complemento") { // Verifica se todos os campos exceto o complemento estão preenchidos.
                 if (!value) {
@@ -69,7 +69,6 @@ const CheckoutPage = () => {
                     isValid = false;
                 } else {
                     setInvalidInputs((prevInvalidInputs) => ({ ...prevInvalidInputs, [key]: false }));
-                    isValid = true;
                 }
             }
         }

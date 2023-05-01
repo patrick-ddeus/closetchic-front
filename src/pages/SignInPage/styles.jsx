@@ -72,6 +72,7 @@ export const InputContainer = styled.div`
 
 export const SignInButton = styled.button`
   width: 326px;
+  height:56px;
   padding:16px;
   background: #007DC0;
   font-style: normal;
