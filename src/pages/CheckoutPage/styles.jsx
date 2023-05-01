@@ -4,8 +4,9 @@ import "@fontsource/raleway";
 
 export const Container = styled.div`
   background-color:#F7F7F7;
-  height:100%;
+  height:${({ loading }) => loading ? "625px" : "100%"};
   padding-bottom:100px;
+  overflow:hidden;
 `;
 
 export const HeaderCheckout = styled.header`
@@ -98,4 +99,54 @@ export const CheckoutButton = styled.button`
   font-size:15px;
   margin-top:40px;
   cursor:pointer;
+`;
+
+export const Blur = styled.div`
+  position: fixed;
+  background: #404eed34;
+  bottom: 0;
+  z-index: 998;
+  height: 100%;
+  width: 100%;
+  margin: 0;
+  opacity: 1;
+  display:flex;
+  justify-content: center;
+  align-items: center;
+  backdrop-filter: blur(10px);
+`;
+
+export const ModalDone = styled.div`
+  width:100%;
+  max-width:340px;
+  background-color:white;
+  box-shadow:0 0 20px #00000029;
+  border-radius:5px;
+  border-left:6px solid #00D373;
+  padding:0 20px;
+  color:#616161;
+  display:flex;
+  justify-content: center;
+  align-items:center;
+  flex-direction:column;
+  font-family:"Raleway", sans-serif;
+
+  button{
+    width:110px;
+    height:33px;
+    background-color:#00D373;
+    margin-top:20px;
+    margin-bottom:40px;
+    border:0;
+    color:white;
+    text-transform:uppercase;
+    font-weight:500;
+    cursor:pointer;
+    border-radius:5px;
+  }
+
+  p{
+    font-weight:500;
+    text-align:center;
+  }
 `;

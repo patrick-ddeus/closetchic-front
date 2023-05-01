@@ -112,7 +112,22 @@ export const IconsArea = styled.div`
     width:28px;
     cursor:pointer;
     margin-bottom:5px;
-    cursor:pointer;
+  }
+
+  a span{
+    width:20px;
+    height:20px;
+    background-color:#00D373;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    color:black;
+    position:absolute;
+    top:10px;
+    left:-10px;
+    text-align:center;
+    border-radius:50%;
+    font-size:12px;
   }
 `;
 

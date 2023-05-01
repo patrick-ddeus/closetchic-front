@@ -13,6 +13,7 @@ import { FiShoppingCart, FiUser } from "react-icons/fi";
 import { Link, useLocation, useNavigate } from 'react-router-dom';
 import { UserContext } from '../../contexts/userContext';
 import Dropdown from './Dropdown';
+import { CartContext } from '../../contexts/cartContext';
 
 const Header = () => {
     const { pathname } = useLocation();
@@ -20,6 +21,7 @@ const Header = () => {
     const searchRef = useRef(null);
     const [visible, setVisible] = useState(false);
     const { token } = useContext(UserContext);
+    const { getTotalItemsFromCart } = useContext(CartContext);
 
     const handleSearch = (event) => {
         if (event.key === "Enter") {
@@ -66,7 +68,10 @@ const Header = () => {
                 </SearchArea>
 
                 <IconsArea>
-                    <Link to={'/cart'}><FiShoppingCart /></Link>
+                    <Link to={'/cart'}>
+                        <FiShoppingCart />
+                        <span>{getTotalItemsFromCart()}</span>
+                    </Link>
                     {token ?
                         <img
                             src="https://upload.wikimedia.org/wikipedia/commons/thumb/2/2c/Default_pfp.svg/1200px-Default_pfp.svg.png"

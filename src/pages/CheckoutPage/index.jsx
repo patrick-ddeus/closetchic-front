@@ -8,7 +8,9 @@ import {
     RightColumnArea,
     TotalArea,
     ProductDescription,
-    CheckoutButton
+    CheckoutButton,
+    Blur,
+    ModalDone
 } from './styles';
 import { CartContext } from '../../contexts/cartContext';
 import { useNavigate } from 'react-router-dom';
@@ -16,12 +18,18 @@ import CheckoutForm from './CheckoutForm';
 import axios from 'axios';
 import ClosetChicApi from '../../service/closetChic.api';
 import { UserContext } from '../../contexts/userContext';
+import Loader from '../../components/Loader';
+import doneImg from "../../assets/done.png";
+import { motion } from 'framer-motion';
 
 const CheckoutPage = () => {
     const { getTotalItemsFromCart, cart } = useContext(CartContext);
     const { token } = useContext(UserContext);
     const navigate = useNavigate();
     const [selectedPayment, setSelectedPayment] = useState("creditCard");
+    const [loading, setLoading] = useState(false);
+    const [isOpen, setIsOpen] = useState(false);
+
     const [form, setForm] = useState({
         email: "",
         nome: "",
@@ -51,37 +59,6 @@ const CheckoutPage = () => {
             navigate('/');
         }
     }, []);
-
-    const handleSubmitCheckout = async () => {
-        if (!handleValidInputs()) return;
-
-        const body = {
-            orderItems: cart,
-            shippingAddress: {
-                fullName: `${form.nome} ${form.sobrenome}`,
-                address: {
-                    district: form.bairro,
-                    city: form.cidade,
-                    street: form.endereco,
-                    number: form.numero,
-                    complement: form.complemento
-                },
-                postalCode: form.cep,
-            },
-            tel: form.telefone,
-            totalPrice: getTotalItemsFromCart(),
-            paymentMethod: selectedPayment,
-            isPaid: true,
-            paidAt: Date.now()
-        };
-
-        try {
-            const response = await ClosetChicApi.sendOrder(body, token)
-            console.log(response)
-        } catch (error) {
-            console.error(error)
-        }
-    };
 
     const handleValidInputs = () => {
         let isValid = '';
@@ -168,58 +145,148 @@ const CheckoutPage = () => {
         return cart.reduce((total, item) => total + item.price, 0);
     };
 
+    const handleSubmitCheckout = async () => {
+        if (!handleValidInputs()) return;
+
+        const body = {
+            orderItems: cart,
+            shippingAddress: {
+                fullName: `${form.nome} ${form.sobrenome}`,
+                address: {
+                    district: form.bairro,
+                    city: form.cidade,
+                    street: form.endereco,
+                    number: form.numero,
+                    complement: form.complemento
+                },
+                postalCode: form.cep,
+            },
+            tel: form.telefone,
+            totalPrice: cartGetTotal(),
+            paymentMethod: selectedPayment,
+            isPaid: true,
+            paidAt: Date.now()
+        };
+        setLoading(true);
+        try {
+            await ClosetChicApi.sendOrder(body, token);
+            setIsOpen(true);
+        } catch (error) {
+            console.error(error);
+        } finally {
+            setLoading(false);
+        }
+    };
+
     return (
-        <Container>
-            <HeaderCheckout >
-                <h1 onClick={() => navigate('/')}>ClosetChic</h1>
-                <h2>Checkout</h2>
-            </HeaderCheckout>
-            <GridContainer>
-                <LeftColumn>
-                    <CheckoutForm
-                        form={form}
-                        setSelectedPayment={setSelectedPayment}
-                        selectedPayment={selectedPayment}
-                        invalidInputs={invalidInputs}
-                        onChange={handleInputChange}
-                        onChangePayment={handleOnChangePayment} />
-                </LeftColumn>
+        <>
+            {loading && <Loader />}
+            {isOpen &&
+                <Blur>
+                    <motion.div
+                        initial={{
+                            y: -100,
+                            opacity: 0,
+                            duration: 0.5,
+                            ease: [0.43, 0.13, 0.23, 0.96]
+                        }}
+                        animate={{
+                            y: 0,
+                            opacity: 1,
+                            transition: {
+                                delay: 0.1,
+                                duration: 0.5,
+                                ease: [0.43, 0.13, 0.23, 0.96]
+                            }
+                        }}
+                        exit={{
+                            y: 100,
+                            opacity: 0,
+                            duration: 0.5,
+                            ease: [0.43, 0.13, 0.23, 0.96]
+                        }}>
+                        <ModalDone>
+                            <img src={doneImg} alt="" />
+                            <p>Eba &#129321;! Seu pedido foi realizado com sucesso!</p>
+                            <button onClick={() => navigate('/')}>ok</button>
+                        </ModalDone>
+                    </motion.div>
+                </Blur>
+            }
+            <motion.div
+                initial={{
+                    opacity: 0,
+                    duration: 0.5,
+                    ease: [0.43, 0.13, 0.23, 0.96]
+                }}
+                animate={{
+                    opacity: 1,
+                    transition: {
+                        delay: 0.1,
+                        duration: 0.5,
+                        ease: [0.43, 0.13, 0.23, 0.96]
+                    }
+                }}
+                exit={{
+                    opacity: 0,
+                    duration: 0.5,
+                    ease: [0.43, 0.13, 0.23, 0.96]
+                }}>
 
-                <RightColumn>
-                    <RightColumnArea>
-                        <h3>{getTotalItemsFromCart()} itens</h3>
-                        <ProductDescription>
-                            <span>
-                                <p>Subtotal Produto</p>
-                                <p>R$ {cartGetTotal().toFixed(2)}</p>
-                            </span>
 
-                            <span>
-                                <p>Descontos</p>
-                                <p>R$ 0.00</p>
-                            </span>
+                <Container loading={loading || isOpen}>
+                    <HeaderCheckout >
+                        <h1 onClick={() => navigate('/')}>ClosetChic</h1>
+                        <h2>Checkout</h2>
+                    </HeaderCheckout>
+                    <GridContainer>
+                        <LeftColumn>
+                            <CheckoutForm
+                                form={form}
+                                setSelectedPayment={setSelectedPayment}
+                                selectedPayment={selectedPayment}
+                                invalidInputs={invalidInputs}
+                                onChange={handleInputChange}
+                                onChangePayment={handleOnChangePayment} />
+                        </LeftColumn>
 
-                            <span>
-                                <p>Entrega</p>
-                                <p>Grátis</p>
-                            </span>
+                        <RightColumn>
+                            <RightColumnArea>
+                                <h3>{getTotalItemsFromCart()} itens</h3>
+                                <ProductDescription>
+                                    <span>
+                                        <p>Subtotal Produto</p>
+                                        <p>R$ {cartGetTotal().toFixed(2)}</p>
+                                    </span>
 
-                            <span>
-                                <p>Taxas Estimadas</p>
-                                <p>R$ 0.00</p>
-                            </span>
-                        </ProductDescription>
-                        <TotalArea>
-                            <p>Total Estimado</p>
-                            <p>R$ {cartGetTotal().toFixed(2)}</p>
-                        </TotalArea>
-                        <CheckoutButton onClick={handleSubmitCheckout}>
-                            Continuar
-                        </CheckoutButton>
-                    </RightColumnArea>
-                </RightColumn>
-            </GridContainer>
-        </Container >
+                                    <span>
+                                        <p>Descontos</p>
+                                        <p>R$ 0.00</p>
+                                    </span>
+
+                                    <span>
+                                        <p>Entrega</p>
+                                        <p>Grátis</p>
+                                    </span>
+
+                                    <span>
+                                        <p>Taxas Estimadas</p>
+                                        <p>R$ 0.00</p>
+                                    </span>
+                                </ProductDescription>
+                                <TotalArea>
+                                    <p>Total Estimado</p>
+                                    <p>R$ {cartGetTotal().toFixed(2)}</p>
+                                </TotalArea>
+                                <CheckoutButton onClick={handleSubmitCheckout}>
+                                    Continuar
+                                </CheckoutButton>
+                            </RightColumnArea>
+                        </RightColumn>
+                    </GridContainer>
+                </Container >
+            </motion.div>
+        </>
     );
 };
 
