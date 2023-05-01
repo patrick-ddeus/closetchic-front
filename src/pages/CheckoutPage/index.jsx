@@ -14,9 +14,12 @@ import { CartContext } from '../../contexts/cartContext';
 import { useNavigate } from 'react-router-dom';
 import CheckoutForm from './CheckoutForm';
 import axios from 'axios';
+import ClosetChicApi from '../../service/closetChic.api';
+import { UserContext } from '../../contexts/userContext';
 
 const CheckoutPage = () => {
     const { getTotalItemsFromCart, cart } = useContext(CartContext);
+    const { token } = useContext(UserContext);
     const navigate = useNavigate();
     const [selectedPayment, setSelectedPayment] = useState("creditCard");
     const [form, setForm] = useState({
@@ -41,27 +44,59 @@ const CheckoutPage = () => {
         cidade: false,
         bairro: false,
         cep: false,
-        telefone: false
     });
 
-    const handleSubmitCheckout = () => {
-        if(!handleValidInputs()) return
-    }
+    useEffect(() => {
+        if (!token) {
+            navigate('/');
+        }
+    }, []);
+
+    const handleSubmitCheckout = async () => {
+        if (!handleValidInputs()) return;
+
+        const body = {
+            orderItems: cart,
+            shippingAddress: {
+                fullName: `${form.nome} ${form.sobrenome}`,
+                address: {
+                    district: form.bairro,
+                    city: form.cidade,
+                    street: form.endereco,
+                    number: form.numero,
+                    complement: form.complemento
+                },
+                postalCode: form.cep,
+            },
+            tel: form.telefone,
+            totalPrice: getTotalItemsFromCart(),
+            paymentMethod: selectedPayment,
+            isPaid: true,
+            paidAt: Date.now()
+        };
+
+        try {
+            const response = await ClosetChicApi.sendOrder(body, token)
+            console.log(response)
+        } catch (error) {
+            console.error(error)
+        }
+    };
 
     const handleValidInputs = () => {
-        let isValid = ''
+        let isValid = '';
         for (let [key, value] of Object.entries(form)) {
             if (key !== "complemento") { // Verifica se todos os campos exceto o complemento estão preenchidos.
                 if (!value) {
                     setInvalidInputs((prevInvalidInputs) => ({ ...prevInvalidInputs, [key]: true }));
-                    isValid = false
-                }else{
+                    isValid = false;
+                } else {
                     setInvalidInputs((prevInvalidInputs) => ({ ...prevInvalidInputs, [key]: false }));
-                    isValid = true
+                    isValid = true;
                 }
             }
         }
-        return isValid
+        return isValid;
     };
 
     const handleOnChangePayment = (event) => {
@@ -79,9 +114,6 @@ const CheckoutPage = () => {
                 handleTelChange(name, value);
                 break;
             case "numero":
-                handleNumberChange(name, value);
-                break;
-            case "complemento":
                 handleNumberChange(name, value);
                 break;
             default:

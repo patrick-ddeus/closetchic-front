@@ -136,7 +136,6 @@ const CheckoutForm = (
                     <InputCheckout
                         value={form.telefone}
                         name="telefone"
-                        isInvalid={invalidInputs.telefone}
                         onChange={onChange}
                         type="tel"
                         id="tel"

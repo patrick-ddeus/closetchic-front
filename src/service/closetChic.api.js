@@ -60,6 +60,33 @@ const postCartProducts = async (products, token) => {
     }
 };
 
+const authenticateUser = async (body) => {
+    try {
+        const response = await axiosInstance.post(`/sign-in`, body);
+        return response.data;
+    } catch (error) {
+        return error.data;
+    }
+};
+
+const registerUser = async (body) => {
+    try {
+        const response = await axiosInstance.post(`/sign-up`, body);
+        return response.data;
+    } catch (error) {
+        return error.data;
+    }
+};
+
+const sendOrder = async (body, token) => {
+    try {
+        const response = await axiosInstance.post(`/orders`, body, createHeader(token));
+        return response.data;
+    } catch (error) {
+        return error.data;
+    }
+};
+
 const createHeader = (token) => {
     return {
         headers: {
@@ -67,24 +94,6 @@ const createHeader = (token) => {
         }
     };
 };
-
-const authenticateUser = async (body) => {
-    try {
-       const response = await axiosInstance.post(`/sign-in`, body);
-       return response.data
-    } catch (error) {
-        return error.data;
-    }
-}
-
-const registerUser = async (body) => {
-    try {
-       const response = await axiosInstance.post(`/sign-up`, body);
-       return response.data
-    } catch (error) {
-        return error.data;
-    }
-}
 
 export default {
     getProducts,
@@ -94,5 +103,6 @@ export default {
     getCartProducts,
     postCartProducts,
     authenticateUser,
-    registerUser
+    registerUser,
+    sendOrder
 };
