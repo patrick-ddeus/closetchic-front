@@ -142,7 +142,7 @@ const CheckoutPage = () => {
     }
 
     const cartGetTotal = () => {
-        return cart.reduce((total, item) => total + item.price, 0);
+        return cart?.reduce((total, item) => total + item.price, 0);
     };
 
     const handleSubmitCheckout = async () => {

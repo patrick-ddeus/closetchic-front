@@ -5,7 +5,7 @@ import { UserContext } from "./userContext.js";
 export const CartContext = createContext();
 
 export default function CartContextProvider({ children }) {
-  const initValue = JSON.parse(localStorage.getItem("cart")) || []
+  const initValue = JSON.parse(localStorage.getItem("cart")) || [];
   const [cart, setCart] = useState(initValue);
   const [coupon, setCoupon] = useState({ name: "", value: 0 });
   const { token } = useContext(UserContext);
@@ -14,7 +14,8 @@ export default function CartContextProvider({ children }) {
     async function fetchData() {
       if (token) {
         if (cart && cart.length === 0) {
-          const products = await closetChicApi.getCartProducts(token);
+          const { products } = await closetChicApi.getCartProducts(token);
+          console.log(products);
           setCart(products);
         } else {
           closetChicApi.postCartProducts(cart, token);
@@ -24,10 +25,10 @@ export default function CartContextProvider({ children }) {
     fetchData();
   }, [token]);
 
-  function getTotalItemsFromCart(){
-    return cart.reduce((total, item) => total + item.quantity, 0)
+  function getTotalItemsFromCart() {
+    return cart?.reduce((total, item) => total + item.quantity, 0);
   }
-  
+
   return (
     <CartContext.Provider value={{ cart, setCart, coupon, setCoupon, getTotalItemsFromCart }}>
       {children}
