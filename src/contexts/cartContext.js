@@ -24,8 +24,12 @@ export default function CartContextProvider({ children }) {
     fetchData();
   }, [token]);
 
+  function getTotalItemsFromCart(){
+    return cart.reduce((total, item) => total + item.quantity, 0)
+  }
+
   return (
-    <CartContext.Provider value={{ cart, setCart, coupon, setCoupon }}>
+    <CartContext.Provider value={{ cart, setCart, coupon, setCoupon, getTotalItemsFromCart }}>
       {children}
     </CartContext.Provider>
   );

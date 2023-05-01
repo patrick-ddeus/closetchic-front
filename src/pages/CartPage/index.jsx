@@ -31,7 +31,7 @@ export default function CartPage() {
   useEffect(() => {
     async function fetchData() {
       if (token && cart?.length === 0) {
-        const products = await closetChicApi.getCartProducts(token);
+        const { products } = await closetChicApi.getCartProducts(token);
         setCart(products);
         setSubtotal(getSubtotal(products));
       } else {

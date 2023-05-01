@@ -50,7 +50,7 @@ const FeatureProducts = () => {
       </TitleContainer>
       <ProductsArea ref={scrollContainer}>
         {featuredProducts.map(product => (
-          <ProductCard>
+          <ProductCard key={product._id}>
             <div className='productImageArea'>
               <img src={product.image} alt="" />
             </div>

@@ -13,11 +13,11 @@ export default function SignInPage() {
     const passwordRef = useRef(null);
     const [form, setForm] = useState({ email: "", password: "" });
     const [isDisabled, setIsDisabled] = useState(false);
-    const { setToken, setName } = useContext(UserContext);
     const [invalidInputs, setInvalidInputs] = useState({
         email: null,
         password: null
     });
+    const { setToken, setName } = useContext(UserContext);
 
     function handleChange(event) {
         setForm({ ...form, [event.target.name]: event.target.value });
