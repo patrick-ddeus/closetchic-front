@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React from 'react';
 import {
     ShippingGroup,
     Divisor,
@@ -9,21 +9,29 @@ import {
 import payments from "../../../assets/payments.png";
 import pix from "../../../assets/pix.png";
 
-
-const CheckoutForm = () => {
-    const [selectedPayments, setSelectedPayment] = useState("");
-
-    const handleOnChangePayment = (event) => {
-        setSelectedPayment(event.target.value);
-    };
-
+const CheckoutForm = (
+    {
+        form,
+        invalidInputs,
+        onChange,
+        onChangePayment,
+        selectedPayment,
+        setSelectedPayment
+    }
+) => {
     return (
         <div>
             <Divisor>
                 <h3>Informações de Contato</h3>
                 <div>
                     <label htmlFor="email">Endereço de Email</label>
-                    <InputCheckout type="text" id="email" />
+                    <InputCheckout
+                        isInvalid={invalidInputs.email}
+                        name="email"
+                        value={form.email}
+                        onChange={onChange}
+                        type="email"
+                        id="email" />
                 </div>
             </Divisor>
             <Divisor>
@@ -31,40 +39,109 @@ const CheckoutForm = () => {
                 <ShippingGroup>
                     <div>
                         <label htmlFor="nome">Nome</label>
-                        <InputCheckout type="text" id="nome" />
+                        <InputCheckout
+                            isInvalid={invalidInputs.nome}
+                            value={form.nome}
+                            name="nome"
+                            onChange={onChange}
+                            type="text"
+                            id="nome" />
                     </div>
 
                     <div>
                         <label htmlFor="sobrenome">Sobrenome</label>
-                        <InputCheckout type="text" id="sobrenome" />
+                        <InputCheckout
+                            isInvalid={invalidInputs.sobrenome}
+                            value={form.sobrenome}
+                            name="sobrenome"
+                            onChange={onChange}
+                            type="text"
+                            id="sobrenome" />
                     </div>
                 </ShippingGroup>
 
                 <div className="address-group">
-                    <label htmlFor="endereco">Endereço</label>
-                    <InputCheckout type="text" id="endereco" />
+                    <div>
+                        <label htmlFor="endereco">Endereço</label>
+                        <InputCheckout
+                            isInvalid={invalidInputs.endereco}
+                            value={form.endereco}
+                            name="endereco"
+                            onChange={onChange}
+                            type="text"
+                            id="endereco" />
+                    </div>
+
+                    <div>
+                        <label htmlFor="numero">Número</label>
+                        <InputCheckout
+                            isInvalid={invalidInputs.numero}
+                            value={form.numero}
+                            name="numero"
+                            onChange={onChange}
+                            type="text"
+                            id="numero" />
+                    </div>
+
+                    <div>
+                        <label htmlFor="complemento">Complemento (Opcional)</label>
+                        <InputCheckout
+                            value={form.complemento}
+                            name="complemento"
+                            onChange={onChange}
+                            type="text"
+                            id="complemento" />
+                    </div>
+
                 </div>
 
                 <div className="city-group">
                     <div>
                         <label htmlFor="cidade">Cidade</label>
-                        <InputCheckout type="text" id="cidade" />
+                        <InputCheckout
+                            isInvalid={invalidInputs.cidade}
+                            value={form.cidade}
+                            name="cidade"
+                            onChange={onChange}
+                            type="text"
+                            id="cidade" />
                     </div>
 
                     <div>
                         <label htmlFor="bairro">Bairro</label>
-                        <InputCheckout type="text" id="bairro" />
+                        <InputCheckout
+                            isInvalid={invalidInputs.bairro}
+                            value={form.bairro}
+                            name="bairro"
+                            onChange={onChange}
+                            type="text"
+                            id="bairro" />
                     </div>
 
                     <div>
                         <label htmlFor="cep">CEP</label>
-                        <InputCheckout type="text" id="cep" />
+                        <InputCheckout
+                            isInvalid={invalidInputs.cep}
+                            value={form.cep}
+                            name="cep"
+                            onChange={onChange}
+                            type="text"
+                            pattern="^\d{5}-?\d{3}$"
+                            id="cep" />
                     </div>
                 </div>
 
                 <div className="cell-group">
                     <label htmlFor="tel">Número de telefone</label>
-                    <InputCheckout type="text" id="tel" />
+                    <InputCheckout
+                        value={form.telefone}
+                        name="telefone"
+                        isInvalid={invalidInputs.telefone}
+                        onChange={onChange}
+                        type="tel"
+                        id="tel"
+                        pattern="\([0-9]{2}\)\s[0-9]{4,5}-[0-9]{4}"
+                    />
                 </div>
             </Divisor>
             <Divisor>
@@ -76,8 +153,8 @@ const CheckoutForm = () => {
                                 type="radio"
                                 name="payment"
                                 value="creditCard"
-                                checked={selectedPayments === "creditCard"}
-                                onChange={handleOnChangePayment}
+                                checked={selectedPayment === "creditCard"}
+                                onChange={onChangePayment}
                             />
                             <p>Cartão de Crédito</p>
                         </div>
@@ -90,8 +167,8 @@ const CheckoutForm = () => {
                                 type="radio"
                                 name="payment"
                                 value="pix"
-                                checked={selectedPayments === "pix"}
-                                onChange={handleOnChangePayment} />
+                                checked={selectedPayment === "pix"}
+                                onChange={onChangePayment} />
                             <p>Pix</p>
                         </div>
                         <img src={pix} alt="payments" />

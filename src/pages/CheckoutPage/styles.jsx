@@ -37,35 +37,6 @@ export const LeftColumn = styled.div`
     font-family:"Raleway", sans-serif;
     font-weight:400;
 
-  .address-group{
-    margin-top:17px;
-    input{
-        width:100%;
-    }
-  }
-
-  .city-group{
-    display:flex;
-    gap:11px;
-
-    div:nth-child(2){
-        input{
-            width:100%;
-        }
-    }
-
-    div:nth-child(3){
-        input{
-            width:100%;
-        }
-    }
-  }
-
-  .cell-group{
-    input{
-        width:172px;
-    }
-  }
 `;
 
 export const RightColumn = styled.div`
@@ -114,7 +85,7 @@ export const TotalArea = styled.div`
 `;
 
 export const CheckoutButton = styled.button`
-  width:389px;
+  width:100%;
   height:41px;
   background: #1C232C;
   color:white;
