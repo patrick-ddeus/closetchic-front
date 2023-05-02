@@ -4,43 +4,52 @@ import colors from "../../constants/colors.js";
 export const ContainerCartPage = styled.div`
   display: flex;
   margin: auto;
-  height: 650px;
+  min-height: 650px;
   h1{
     font-family: 'Raleway';
     font-weight: 600;
     font-size: 18px;
     margin-bottom: 28px;
   }
+  @media (max-width: 1200px) {
+    flex-direction: column;
+  }
 `
 export const ContainerLeft = styled.div`
-  width: 59%;
+  width: 100%;
   border-right: 1px solid #D9D9D9;
   padding: 40px 46px 0px 31px;
+  @media (max-width: 1200px) {
+    padding: 40px 30px 0px 30px;
+  }
 `
-export const ContainerRight = styled.div`
-  width: 41%;
+export const ContainerRight = styled.div`  
+  max-width: 40%;
   padding: 40px 72px 0px 47px;
+  @media (max-width: 1200px) {
+    max-width: 100%;
+    padding: 60px 30px;
+  }
 `
 export const SectionBreak = styled.div`
   width: 100%;
   height: 1px;
   background-color: #D9D9D9;
 `
-export const TableDescriptions = styled.div`
+export const TableDescriptions = styled.tr`
   padding: 0 24px 0 0;
   height: 50px;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  h2{
+  position: sticky;
+  top: 0;
+  background-color: #FFFFFF;
+  th{
     font-family: 'Raleway';
     font-weight: 500;
     font-size: 16px;
-  }
+  }  
 `
 export const ContainerCart = styled.div`
-  padding-top: 38px;
-  max-height: 468px;
+  max-height: 600px;
   overflow-y: auto;
   -ms-overflow-style: none;
   scrollbar-width: none;
@@ -48,61 +57,45 @@ export const ContainerCart = styled.div`
     display: none;
   }
 `
-export const Product = styled.div`
-  height: 174px;
-  padding-right: 24px;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
+export const Product = styled.tr`
   font-family: 'Raleway';
   font-style: normal;
   font-weight: 400;
   font-size: 15px;
-  overflow:hidden;
-
-  p{
-    width: 80px;
+  td{
     text-align: center;
-  }
-  img{
-    width: 172px;
-    position:relative;
-    bottom:-20px;
-  }
-
-  span{
-    font-weight: 500;
-    width: 63px;
-    text-align: end;
-  }
-  strong{
-    display: flex;
-    align-items: center;
-    width: 150px;
-    p{
-    width: 120px;
-    width: inherit;
-    font-weight: 700;
-    white-space: nowrap;
-    overflow: hidden;
-    text-overflow: ellipsis;
-    text-align: start;
-    :hover{
-      overflow: visible;
-      white-space: break-spaces;
+    padding-top: 15px;
+    img{
+      width: 172px;
+      height: 174px;
     }
+    span{
+      font-weight: 500;
     }
-  }
-  
-  input{
-    width: 63px;
-    height: 38px;
-    background: #FFFFFF;
-    border: 1px solid #EAEAEA;
-    text-align: center;
-  }
-  && ~ &&{
-    margin-top: 25px;
+    strong{
+      display: flex;
+      align-items: center;
+      overflow: hidden;
+      p{
+      max-width: 250px;
+      font-weight: 700;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      text-align: start;
+      :hover{
+        overflow: visible;
+        white-space: break-spaces;
+      }
+      }
+    }
+    input{
+      width: 63px;
+      height: 38px;
+      background: #FFFFFF;
+      border: 1px solid #EAEAEA;
+      text-align: center;
+    }
   }
 `
 export const ContainerSubtotal = styled.div`
@@ -122,7 +115,7 @@ export const Coupon = styled.div`
   justify-content: space-between;
   align-items: center;
   input{
-    width: 294px;
+    width: 100%;
     height: 43px;
     background: #FFFFFF;
     border: 1px solid #D9D9D9;
@@ -135,7 +128,8 @@ export const Coupon = styled.div`
     }
   }
   button{
-    width: 137px;
+    max-width: 137px;
+    width: 100%;
     height: 43px;
     background: ${colors.primaryColor};
     font-family: 'Raleway';
