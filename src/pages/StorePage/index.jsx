@@ -1,3 +1,4 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 import React, { useReducer, useState, useEffect } from 'react';
 import DescountBar from '../../components/DescountBar';
 import Header from '../../components/Header';
@@ -72,7 +73,7 @@ const StorePage = () => {
         } else {
             fetchProducts();
         }
-    }, [searchParams, page]);
+    }, [page]);
 
     return (
         <div>
