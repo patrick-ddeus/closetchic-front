@@ -63,7 +63,7 @@ export default function CartPage() {
   }
 
   function handleDiscount() {
-    if (coupons.includes(coupon.name)) {
+    if (coupons.includes(coupon.name.toLowerCase())) {
       const obj = { ...coupon };
       obj.value = subtotal * 0.2;
       setCoupon(obj);
