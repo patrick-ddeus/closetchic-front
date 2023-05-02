@@ -7,8 +7,10 @@ import {
     IconsArea,
     SearchInput,
     SearchIconsArea,
+    NavBar,
+    HamburguerButton
 } from './styles';
-import { IoSearchOutline } from "react-icons/io5";
+import { IoSearchOutline, IoMenuOutline } from "react-icons/io5";
 import { FiShoppingCart, FiUser } from "react-icons/fi";
 import { Link, useLocation, useNavigate } from 'react-router-dom';
 import { UserContext } from '../../contexts/userContext';
@@ -20,6 +22,7 @@ const Header = () => {
     const navigate = useNavigate();
     const searchRef = useRef(null);
     const [visible, setVisible] = useState(false);
+    const [isOpen, setIsOpen] = useState(true)
     const { token } = useContext(UserContext);
     const { getTotalItemsFromCart } = useContext(CartContext);
 
@@ -33,31 +36,33 @@ const Header = () => {
     return (
         <Container active={pathname === "/"}>
             <Link to="/" className="title">ClosetChic</Link>
-            <List>
-                <ListItem active={pathname === "/products"}>
-                    <Link to="/products">
-                        Comprar
-                    </Link>
-                </ListItem>
+            <NavBar isOpen={isOpen}>
+                <List>
+                    <ListItem active={pathname === "/products"}>
+                        <Link to="/products">
+                            Comprar
+                        </Link>
+                    </ListItem>
 
-                <ListItem active={false}>
-                    <Link to="/under-construction">
-                        Mais Procurados
-                    </Link>
-                </ListItem>
+                    <ListItem active={false}>
+                        <Link to="/under-construction">
+                            Mais Procurados
+                        </Link>
+                    </ListItem>
 
-                <ListItem active={false}>
-                    <Link to="/under-construction">
-                        Lançamentos
-                    </Link>
-                </ListItem>
+                    <ListItem active={false}>
+                        <Link to="/under-construction">
+                            Lançamentos
+                        </Link>
+                    </ListItem>
 
-                <ListItem active={false}>
-                    <Link to="/under-construction">
-                        Marcas
-                    </Link>
-                </ListItem>
-            </List>
+                    <ListItem active={false}>
+                        <Link to="/under-construction">
+                            Marcas
+                        </Link>
+                    </ListItem>
+                </List>
+            </NavBar>
             <SearchIconsArea>
 
                 <SearchArea>
@@ -79,9 +84,13 @@ const Header = () => {
                             onClick={() => setVisible(!visible)} /> :
                         <FiUser onClick={() => setVisible(!visible)} />
                     }
-                    <Dropdown visible={visible}/>
+                    <Dropdown visible={visible} />
                 </IconsArea>
             </SearchIconsArea>
+
+            <HamburguerButton onClick={() => setIsOpen(!isOpen)}>
+                <IoMenuOutline />
+            </HamburguerButton>
         </Container>
     );
 };

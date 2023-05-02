@@ -2,6 +2,20 @@ import styled from 'styled-components';
 import "@fontsource/righteous";
 import "@fontsource/raleway";
 
+export const NavBar = styled.nav`
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap:170px;
+
+  @media (max-width: 1100px) {
+    display:none;
+  }
+`;
+
+export const HamburguerButton = styled.button`
+  display: none;
+`;
 
 export const Container = styled.header`
   margin:23px 0 46px;
@@ -10,6 +24,7 @@ export const Container = styled.header`
   justify-content: space-between;
   align-items: center;
   border-bottom:1px solid #f0f0f0;
+  position:relative;
 
   .title{
     font-family:"Righteous", sans-serif;
@@ -17,6 +32,19 @@ export const Container = styled.header`
     font-size:40px;
     color:black;
     position:relative;
+  }
+
+  @media screen and (max-width:1100px){
+    nav{
+      order: 1;
+    }
+    div{
+      order: 0;
+    }
+
+    button{
+      order:2;
+    }
   }
 `;
 
