@@ -49,7 +49,7 @@ const reducer = (state, action) => {
 
 const ProductPage = () => {
   const [size, setSize] = useState("p");
-  const quantityRef = useRef(null);
+  const [quantity, setQuantity] = useState(1)
   const { slug } = useParams();
   const { cart, setCart } = useContext(CartContext);
   const { token } = useContext(UserContext);
@@ -78,18 +78,17 @@ const ProductPage = () => {
   }, []);
 
   const updateQuantity = (increment) => {
-    const convertedValue = Number(quantityRef.current?.value);
+    const convertedValue = Number(quantity);
     const newQuantity = increment ? convertedValue + 1 : convertedValue - 1;
-    const quantity = newQuantity < 1 ? 1 : newQuantity;
+    const currentQuantity = newQuantity < 1 ? 1 : newQuantity;
 
-    quantityRef.current.value = quantity;
+    setQuantity(currentQuantity);
   };
 
   const addToCart = () => {
     const { name, slug, image, price, _id } = product;
-    const quantity = Number(quantityRef.current.value);
-    const productToAdd = { name, slug, image, price, size, product: _id, quantity };
-    console.log(cart)
+    const newQuantity = Number(quantity);
+    const productToAdd = { name, slug, image, price, size, product: _id, quantity: newQuantity };
     const newCart = [...cart];
 
     const productIndex = findProductIndex(newCart, productToAdd);
@@ -186,7 +185,7 @@ const ProductPage = () => {
                   <button onClick={() => updateQuantity(false)}>
                     <FiMinus />
                   </button>
-                  <input type="text" disabled value={1} ref={quantityRef} />
+                  <input type="text" disabled value={quantity} onChange={event => setQuantity(event.target.value)} />
                   <button onClick={() => updateQuantity(true)}>
                     <FiPlus />
                   </button>
