@@ -11,7 +11,7 @@ export const ContainerCartPage = styled.div`
     font-size: 18px;
     margin-bottom: 28px;
   }
-  @media (max-width: 800px) {
+  @media (max-width: 1200px) {
     flex-direction: column;
   }
 `
@@ -19,16 +19,16 @@ export const ContainerLeft = styled.div`
   width: 100%;
   border-right: 1px solid #D9D9D9;
   padding: 40px 46px 0px 31px;
-  @media (max-width: 800px) {    
-    padding: 40px 0px 0px 0px;
+  @media (max-width: 1200px) {
+    padding: 40px 30px 0px 30px;
   }
 `
 export const ContainerRight = styled.div`  
   max-width: 40%;
   padding: 40px 72px 0px 47px;
-  @media (max-width: 800px) {
-    width: 100%;
-    padding: 60px 0px 0px 0px;
+  @media (max-width: 1200px) {
+    max-width: 100%;
+    padding: 60px 30px;
   }
 `
 export const SectionBreak = styled.div`
@@ -49,7 +49,7 @@ export const TableDescriptions = styled.tr`
   }  
 `
 export const ContainerCart = styled.div`
-  max-height: 468px;
+  max-height: 600px;
   overflow-y: auto;
   -ms-overflow-style: none;
   scrollbar-width: none;
@@ -61,21 +61,22 @@ export const Product = styled.tr`
   font-family: 'Raleway';
   font-style: normal;
   font-weight: 400;
-  font-size: 15px;  
+  font-size: 15px;
   td{
     text-align: center;
+    padding-top: 15px;
     img{
       width: 172px;
       height: 174px;
     }
     span{
-      font-weight: 500;      
+      font-weight: 500;
     }
     strong{
       display: flex;
-      align-items: center;      
+      align-items: center;
       overflow: hidden;
-      p{      
+      p{
       max-width: 250px;
       font-weight: 700;
       white-space: nowrap;

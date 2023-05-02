@@ -113,7 +113,7 @@ export default function CartPage() {
             <h1>Carrinho de compras</h1>
             <SectionBreak />
             <ContainerCart>
-            <table style={{width:"100%", position:"relative"}}>
+            <table style={{width:"100%"}}>
             <TableDescriptions>
                 <th colSpan={3}>Produto</th>
                 <th>Preço</th>
