@@ -87,6 +87,15 @@ const sendOrder = async (body, token) => {
     }
 };
 
+const getOrders = async (token) => {
+    try {
+        const response = await axiosInstance.get(`/orders`, createHeader(token));
+        return response.data;
+    } catch (error) {
+        return error.data;
+    }
+};
+
 const createHeader = (token) => {
     return {
         headers: {
@@ -104,5 +113,6 @@ export default {
     postCartProducts,
     authenticateUser,
     registerUser,
-    sendOrder
+    sendOrder,
+    getOrders
 };

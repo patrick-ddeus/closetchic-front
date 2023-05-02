@@ -11,9 +11,9 @@ export const Container = styled.div`
 
 export const HeaderCheckout = styled.header`
   padding:20px 0 20px 72px;
-  width:50%;
+  width:100%;
   display:flex;
-  justify-content: space-between;
+  gap:200px;
   align-items:center;
 
   h1{
@@ -25,6 +25,10 @@ export const HeaderCheckout = styled.header`
     font-family:"Raleway", sans-serif;
     font-weight:400;
   }
+
+  @media (max-width: 1300px) {
+    
+  }
 `;
 
 export const GridContainer = styled.div`
@@ -32,12 +36,16 @@ export const GridContainer = styled.div`
   display:grid;
   grid-template-columns:2fr 1fr;
   gap:10px;
+
+  @media (max-width: 1300px) {
+    grid-template-columns:1fr;
+  }
 `;
 
 export const LeftColumn = styled.div`
     font-family:"Raleway", sans-serif;
     font-weight:400;
-
+    width:100%;
 `;
 
 export const RightColumn = styled.div`
@@ -45,6 +53,11 @@ export const RightColumn = styled.div`
   background-color:#fff;
   max-height:338px;
   font-family:"Raleway", sans-serif;
+  width:379px;
+
+  @media (max-width: 1300px) {
+    width:100%;
+  }
 `;
 
 export const RightColumnArea = styled.div`
@@ -99,6 +112,9 @@ export const CheckoutButton = styled.button`
   font-size:15px;
   margin-top:40px;
   cursor:pointer;
+
+  max-width:386px;
+  margin:0 auto;
 `;
 
 export const Blur = styled.div`

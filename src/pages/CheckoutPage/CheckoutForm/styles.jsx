@@ -1,5 +1,9 @@
 import styled from 'styled-components';
 
+export const Container = styled.div`
+  width:100%;
+`;
+
 export const ShippingGroup = styled.div`
   display:grid;
   grid-template-columns: 1fr 1fr;
@@ -8,6 +12,11 @@ export const ShippingGroup = styled.div`
   input{
     width:100%;
   }
+
+  @media (max-width: 1200px) {
+    display:grid;
+    grid-template-columns: 1fr;
+    }
 `;
 
 export const InputCheckout = styled.input`
@@ -19,10 +28,14 @@ export const InputCheckout = styled.input`
   ${({ isInvalid }) => isInvalid && `
     background-color: #F9DDD8;
   `}
+
+  @media (max-width: 1200px) {
+    width:100%;
+  }
 `;
 
 export const PaymentInput = styled.div`
-  width:386px;
+  width:100%;
   height:43px;
   background-color:#F7F7F7;
   display:flex;
@@ -48,12 +61,31 @@ export const PaymentInput = styled.div`
     display:flex;
     gap:18px;
   }
+
+  @media (max-width: 1200px) {
+    width:100%;
+  }
+
+  @media screen and (max-width:900px){
+    max-width:100%;
+    width:100%;
+  }
 `;
 
 export const PaymentCards = styled.div`
   display:flex;
+  justify-content: center;
   gap:11px;
   margin-top:20px;
+
+  @media (max-width: 1200px) {
+    width:100%;
+    
+  }
+
+  @media screen and (max-width:900px){
+    flex-wrap:wrap;
+  }
 `;
 
 export const Divisor = styled.div`
@@ -81,6 +113,15 @@ export const Divisor = styled.div`
         width:100%;
         max-width:782px;
     }
+
+    @media (max-width: 1200px) {
+      display:grid;
+      grid-template-columns: 1fr;
+
+      input{
+        max-width:100%;
+      }
+    }
   }
 
   .city-group{
@@ -93,6 +134,12 @@ export const Divisor = styled.div`
       input{
         width:100%;
       }
+    }
+
+    @media (max-width: 1200px) {
+      display:grid;
+      grid-template-columns: 1fr;
+      max-width:100%;
     }
   }
 

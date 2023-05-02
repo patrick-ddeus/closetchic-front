@@ -5,6 +5,7 @@ import {
     InputCheckout,
     PaymentInput,
     PaymentCards,
+    Container
 } from './styles';
 import payments from "../../../assets/payments.png";
 import pix from "../../../assets/pix.png";
@@ -20,7 +21,7 @@ const CheckoutForm = (
     }
 ) => {
     return (
-        <div>
+        <Container>
             <Divisor>
                 <h3>Informações de Contato</h3>
                 <div>
@@ -174,7 +175,7 @@ const CheckoutForm = (
                     </PaymentInput>
                 </PaymentCards>
             </Divisor>
-        </div>
+        </Container>
     );
 };
 
