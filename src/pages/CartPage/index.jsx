@@ -109,41 +109,56 @@ export default function CartPage() {
           ease: [0.43, 0.13, 0.23, 0.96]
         }}>
         <ContainerCartPage>
-          <ContainerLeft>
+        <ContainerLeft>
             <h1>Carrinho de compras</h1>
             <SectionBreak />
-            <TableDescriptions>
-              <h2 style={{ width: "25px" }}></h2>
-              <h2 style={{ width: "172px" }}></h2>
-              <h2 style={{ width: "150px" }}>Produto</h2>
-              <h2 style={{ width: "80px", textAlign: "center" }}>Preço</h2>
-              <h2 style={{ width: "63px" }}>Quantidade</h2>
-              <h2 style={{ width: "63px", textAlign: "end" }}>Subtotal</h2>
-            </TableDescriptions>
-            <SectionBreak />
             <ContainerCart>
+            <table style={{width:"100%", position:"relative"}}>
+            <TableDescriptions>
+                <th colSpan={3}>Produto</th>
+                <th>Preço</th>
+                <th>Quantidade</th>
+                <th>Subtotal</th>
+            </TableDescriptions>
+            <tr style={{position:"sticky",top:"50px"}}><td colSpan={6} style={{width:"100%"}}><SectionBreak /></td></tr>
+            
               {cart && cart.length !== 0 ? cart.map((product, index) => (
                 <Product key={index}>
-                  <IoClose size={"25px"} style={{ cursor: "pointer" }} onClick={() => deleteItem(index)} />
-                  <img src={product.image} alt={product.name} />
-                  <strong>
-                    <p>{product.name}</p>
-                    <p style={{ width: "30px" }}>&nbsp;&nbsp;&nbsp;{product.size.toUpperCase()}</p>
-                  </strong>
-                  <p>
-                    {product.price.toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' })}
-                  </p>
-                  <input
-                    type="number"
-                    name="quantity"
-                    value={product.quantity}
-                    min={1}
-                    onChange={e => handleChangeCart(e, index)} />
-                  <span>
+                  <td>                    
+                    <IoClose size={"25px"} style={{ cursor: "pointer" }} onClick={() => deleteItem(index)} />
+                  </td>
+                  <td>
+                    <img src={product.image} alt={product.name} />
+                  </td>
+                  <td>
+                    <div>
+                      <strong>
+                      <p>{product.name}</p>
+                      <p style={{ width: "30px" }}>&nbsp;&nbsp;&nbsp;{product.size.toUpperCase()}</p>
+                      </strong>
+                    </div>
+                  </td>
+                  <td>
+                    <p>
+                      {product.price.toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' })}
+                    </p>
+                  </td>
+                  <td>
+                    <input
+                      type="number"
+                      name="quantity"
+                      value={product.quantity}
+                      min={1}
+                      onChange={e => handleChangeCart(e, index)} />
+                  </td>
+                  <td>
+                    <span>
                     {(product.quantity * product.price).toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' })}
-                  </span>
+                    </span>
+                  </td>
                 </Product>
-              )) : "Você não tem produtos no seu carrinho :("}
+              )) : "Você não tem produtos no seu carrinho :("}            
+            </table>
             </ContainerCart>
           </ContainerLeft>
           <ContainerRight>
