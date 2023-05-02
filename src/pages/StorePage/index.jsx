@@ -37,7 +37,7 @@ const StorePage = () => {
             loading: false,
             error: ''
         });
-    const [searchParams, setSearchParams] = useSearchParams();
+    const searchParams = useSearchParams();
     const [page, setPage] = useState(1);
     const [pageCount, setPageCount] = useState(1);
 
@@ -58,7 +58,7 @@ const StorePage = () => {
         async function fetchProductsByQueryString() {
             dispatch({ type: TYPES.FETCH_REQUEST });
             try {
-                const response = await ClosetChicApi.getProducts(`?q=${searchParams.get('q')}&page=${page}`);
+                const response = await ClosetChicApi.getProducts(`?q=${searchParams[0].get('q')}&page=${page}`);
 
                 dispatch({ type: TYPES.FETCH_SUCCESS, payload: response.products });
 
@@ -67,7 +67,7 @@ const StorePage = () => {
                 dispatch({ type: TYPES.FETCH_ERROR, payload: error.message });
             }
         }
-        if (searchParams.get('q')) {
+        if (searchParams[0].get('q')) {
             fetchProductsByQueryString();
         } else {
             fetchProducts();

@@ -35,7 +35,7 @@ const Footer = () => {
 
                 <Column>
                     <h4>Métodos de Pagamento</h4>
-                    <img src={cardPayments}/>
+                    <img src={cardPayments} alt="cardspayments"/>
                 </Column>
 
             </GridContainer>

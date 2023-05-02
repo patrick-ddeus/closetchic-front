@@ -1,6 +1,5 @@
 import { Link, useNavigate } from "react-router-dom";
 import { useState, useRef } from "react";
-import axios, { formToJSON } from "axios";
 import "@fontsource/raleway";
 import "@fontsource/inter";
 import { IoMdMail, IoMdPerson, IoIosLock } from "react-icons/io";

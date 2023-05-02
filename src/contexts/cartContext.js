@@ -1,3 +1,4 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 import { createContext, useContext, useEffect, useState } from "react";
 import closetChicApi from "../service/closetChic.api.js";
 import { UserContext } from "./userContext.js";

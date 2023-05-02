@@ -1,4 +1,4 @@
-import React, { useReducer, useState, useRef, useEffect, useContext } from 'react';
+import React, { useReducer, useState, useEffect, useContext } from 'react';
 import {
   MainContainer,
   LeftColumn,
@@ -55,11 +55,10 @@ const ProductPage = () => {
   const { token } = useContext(UserContext);
   const navigate = useNavigate();
 
-  const [{ loading, error, product }, dispatch] =
+  const [{ loading, product }, dispatch] =
     useReducer(reducer, {
       product: null,
       loading: false,
-      error: ''
     });
 
   useEffect(() => {
@@ -75,7 +74,7 @@ const ProductPage = () => {
     }
 
     fetchProducts();
-  }, []);
+  }, [slug]);
 
   const updateQuantity = (increment) => {
     const convertedValue = Number(quantity);

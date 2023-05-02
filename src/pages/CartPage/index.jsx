@@ -1,3 +1,5 @@
+/* eslint-disable jsx-a11y/heading-has-content */
+/* eslint-disable react-hooks/exhaustive-deps */
 import { useContext, useEffect, useState } from "react";
 import DescountBar from "../../components/DescountBar/index.jsx";
 import Footer from "../../components/Footer/index.jsx";

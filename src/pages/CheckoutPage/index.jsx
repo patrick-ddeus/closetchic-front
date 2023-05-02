@@ -58,7 +58,7 @@ const CheckoutPage = () => {
         if (!token) {
             navigate('/');
         }
-    }, []);
+    }, [navigate, token]);
 
     const handleValidInputs = () => {
         let isValid = true;
