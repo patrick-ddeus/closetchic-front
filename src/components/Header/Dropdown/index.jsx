@@ -55,6 +55,7 @@ const Dropdown = ({ visible }) => {
 
                     <DropdownListItem onClick={() => {
                         localStorage.removeItem("userinfo");
+                        localStorage.removeItem("cart");
                         window.location.reload();
                     }}>
                         <span>
