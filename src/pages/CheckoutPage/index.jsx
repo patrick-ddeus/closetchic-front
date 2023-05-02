@@ -23,7 +23,7 @@ import doneImg from "../../assets/done.png";
 import { motion } from 'framer-motion';
 
 const CheckoutPage = () => {
-    const { getTotalItemsFromCart, cart } = useContext(CartContext);
+    const { getTotalItemsFromCart, cart , coupon} = useContext(CartContext);
     const { token } = useContext(UserContext);
     const navigate = useNavigate();
     const [selectedPayment, setSelectedPayment] = useState("creditCard");
@@ -141,7 +141,7 @@ const CheckoutPage = () => {
     }
 
     const cartGetTotal = () => {
-        return cart?.reduce((total, item) => total + item.price, 0);
+        return cart?.reduce((total, item) => total + (item.price * item.quantity), 0) - coupon.value;
     };
 
     const handleSubmitCheckout = async () => {
@@ -260,7 +260,7 @@ const CheckoutPage = () => {
 
                                     <span>
                                         <p>Descontos</p>
-                                        <p>R$ 0.00</p>
+                                        <p>R$ {coupon.value.toFixed(2)}</p>
                                     </span>
 
                                     <span>

@@ -65,6 +65,7 @@ export default function CartPage() {
       const obj = { ...coupon };
       obj.value = subtotal * 0.2;
       setCoupon(obj);
+      console.log(coupon)
     }
   }
 
