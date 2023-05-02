@@ -1,6 +1,7 @@
 import React from 'react';
 import underConstruction from "../../assets/under-construction.png";
 import DescountBar from '../../components/DescountBar';
+import Footer from '../../components/Footer';
 import Header from '../../components/Header';
 import { MainContainer, Container } from './styles';
 
@@ -13,6 +14,7 @@ function UnderConstructionPage() {
             <MainContainer>
                 <img src={underConstruction} alt="" />
             </MainContainer>
+            <Footer/>
         </Container>
     );
 }

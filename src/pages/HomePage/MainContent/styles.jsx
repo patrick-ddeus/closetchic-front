@@ -29,6 +29,7 @@ export const Banner = styled.div`
 export const Container = styled.div`
   width:100%;
   padding:0 72px;
+  margin-bottom:110px;
 `;
 
 export const BannerButton = styled.button`
@@ -111,4 +112,8 @@ export const CardIcon = styled.div`
   svg{
     font-size:26px;
   }
+`;
+
+export const MapSection = styled.section`
+  margin:110px 0;
 `;

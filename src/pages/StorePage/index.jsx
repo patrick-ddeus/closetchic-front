@@ -121,9 +121,9 @@ const StorePage = () => {
                                 </PaginationButton>
                             ))}
                         </PaginationArea>
-                        <Footer />
                     </motion.div>
                 )}
+            <Footer />
         </div>
     );
 };

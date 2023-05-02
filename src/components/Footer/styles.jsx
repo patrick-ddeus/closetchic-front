@@ -6,11 +6,19 @@ export const Container = styled.div`
   height:280px;
   width:100%;
   background-color:#EAEEF2;
+
+  @media screen and (max-width:1100px){
+    background-color:transparent;
+  }
 `;
 
 export const GridContainer = styled.div`
   display:grid;
   grid-template-columns: 3fr 1fr 1fr 1fr 1fr;
+
+  @media screen and (max-width:1100px){
+    display:none;
+  }
 
 `;
 
@@ -64,5 +72,32 @@ export const CopyrightContainer = styled.div`
 
   p{
     color:#8E8E8E;
+  }
+
+  @media screen and (max-width:1100px){
+    display:none;
+  }
+`;
+
+export const ResponsiveFooter = styled.div`
+  height:60px;
+  width:100%;
+  border-top: 1px solid #f0f0f0;
+  background-color:white;
+  position:fixed;
+  bottom:0;
+  display:flex;
+  align-items:center;
+  justify-content: space-between;
+  padding:0 72px;
+  font-size:28px;
+  z-index:20;
+
+  svg{
+    cursor:pointer;
+  }
+
+  @media screen and (min-width:1100px){
+    display:none;
   }
 `;

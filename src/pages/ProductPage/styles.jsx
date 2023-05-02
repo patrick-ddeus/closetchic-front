@@ -6,10 +6,19 @@ export const MainContainer = styled.div`
   display:grid;
   grid-template-columns: 1fr 1fr;
   font-family:"Raleway", sans-serif;
+  
+  @media screen and (max-width:1100px){
+    grid-template-columns: 1fr;
+  }
 `;
 
 export const LeftColumn = styled.div`
-  
+  @media screen and (max-width:1100px){
+      display:flex;
+      width:100%;
+      gap:20px;
+      justify-content: center;
+    }
 `;
 
 export const BigMiniature = styled.div`
@@ -24,6 +33,11 @@ export const BigMiniature = styled.div`
         position: absolute;
         bottom:0;
     }
+
+    @media screen and (max-width:1100px){
+      width:400px;
+      order:2;      
+  }
   
 `;
 
@@ -34,9 +48,11 @@ export const Miniature = styled.span`
   background-color:#F6F6F6;
   overflow:hidden;
 
-  img{
-
+  @media screen and (max-width:1100px){
+    order:1;
+    height:156px;
   }
+
 `;
 
 export const MiniatureArea = styled.div`
@@ -45,6 +61,12 @@ export const MiniatureArea = styled.div`
   display:grid;
   grid-template-columns: 1fr 1fr 1fr;
   gap:20px;
+
+  @media screen and (max-width:1100px){
+    grid-template-columns: 1fr;
+    margin-top:0;   
+    margin-bottom:0;
+  }
 `;
 
 export const RightColumn = styled.div`
@@ -57,6 +79,11 @@ margin-left:60px;
         font-size:22px;
         color:#F9CB3C;    
     }
+  }
+
+  @media screen and (max-width:1100px){
+    margin:0;
+    margin-top:40px;
   }
 `;
 
@@ -74,12 +101,22 @@ export const ProductDetailArea = styled.div`
     margin-top:10px;
   }
 
+  @media screen and (max-width:1100px){
+    h4, p{
+      display:none;
+    }
+  }
+
 `;
 
 export const SizeArea = styled.div`
     margin-top:34px;
     padding-bottom:14px;
     border-bottom:1px solid #E3E3E3;
+
+    @media screen and (max-width:1100px){
+      border:0;
+    }
 `;
 
 export const SizeButton = styled.button`
@@ -208,4 +245,32 @@ export const DescriptionArea = styled.div`
   p{
     padding-top:14px;
   }
+
+  @media screen and (max-width:1100px){
+    margin-top:60px;
+  }
+`;
+
+export const ResponsibleTitle = styled.div`
+margin-bottom:40px;
+  h4{
+    font-weight:700;
+    font-size:32px;
+  }
+
+  span{
+    margin-right:10px;
+    margin-top:10px;
+  }
+
+  @media screen and (min-width:1100px){
+    display:none;
+  }
+`;
+
+export const ResponsiveDetails = styled.div`
+  display:flex;
+  justify-content:space-between;
+  border-bottom:1px solid #E3E3E3;
+  padding-bottom:10px;
 `;

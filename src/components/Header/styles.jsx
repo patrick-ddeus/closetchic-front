@@ -116,6 +116,14 @@ export const SearchInput = styled.input`
     &:focus{
       width:199px;
     }
+
+    @media screen and (max-width:1100px){
+      margin-right:50px;
+
+      &:focus{
+      width:139px;
+    }
+    }
 `;
 
 export const SearchIconsArea = styled.div`

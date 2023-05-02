@@ -14,7 +14,9 @@ import {
   FinishOrderArea,
   Quantity,
   AddToCart,
-  DescriptionArea
+  DescriptionArea,
+  ResponsibleTitle,
+  ResponsiveDetails
 } from './styles';
 import Header from "../../components/Header";
 import DescountBar from '../../components/DescountBar';
@@ -49,7 +51,7 @@ const reducer = (state, action) => {
 
 const ProductPage = () => {
   const [size, setSize] = useState("p");
-  const [quantity, setQuantity] = useState(1)
+  const [quantity, setQuantity] = useState(1);
   const { slug } = useParams();
   const { cart, setCart } = useContext(CartContext);
   const { token } = useContext(UserContext);
@@ -111,6 +113,7 @@ const ProductPage = () => {
       productId === productToAdd.product && productSize === productToAdd.size
     );
   };
+
   return (
     <div>
       <DescountBar />
@@ -136,6 +139,15 @@ const ProductPage = () => {
             ease: [0.43, 0.13, 0.23, 0.96]
           }}>
           <MainContainer>
+            <ResponsibleTitle>
+              <h4>{product?.name}</h4>
+              <p>
+                <span>
+                  {product && formatStars(product)}
+                </span>
+                ({product?.rating.toFixed(1)})
+              </p>
+            </ResponsibleTitle>
             <LeftColumn>
               <BigMiniature>
                 <img src={product?.image} alt="" />
@@ -163,39 +175,43 @@ const ProductPage = () => {
                 <Price>R$ {product?.price.toFixed(2).replace(".", ",")}</Price>
               </ProductDetailArea>
 
-              <SizeArea>
-                <p>Tamanhos disponíveis</p>
+              <ResponsiveDetails>
+                <SizeArea>
+                  <p>Tamanhos disponíveis</p>
 
-                <SizeButtonArea>
-                  <SizeButton selected={size === "p"} onClick={() => setSize("p")}>
-                    P
-                  </SizeButton>
-                  <SizeButton selected={size === "m"} onClick={() => setSize("m")}>
-                    M
-                  </SizeButton>
-                  <SizeButton selected={size === "g"} onClick={() => setSize("g")}>
-                    G
-                  </SizeButton>
-                </SizeButtonArea>
-              </SizeArea>
+                  <SizeButtonArea>
+                    <SizeButton selected={size === "p"} onClick={() => setSize("p")}>
+                      P
+                    </SizeButton>
+                    <SizeButton selected={size === "m"} onClick={() => setSize("m")}>
+                      M
+                    </SizeButton>
+                    <SizeButton selected={size === "g"} onClick={() => setSize("g")}>
+                      G
+                    </SizeButton>
+                  </SizeButtonArea>
+                </SizeArea>
 
-              <FinishOrderArea>
-                <Quantity>
-                  <button onClick={() => updateQuantity(false)}>
-                    <FiMinus />
-                  </button>
-                  <input type="text" disabled value={quantity} onChange={event => setQuantity(event.target.value)} />
-                  <button onClick={() => updateQuantity(true)}>
-                    <FiPlus />
-                  </button>
-                </Quantity>
+                <FinishOrderArea>
+                  <Quantity>
+                    <button onClick={() => updateQuantity(false)}>
+                      <FiMinus />
+                    </button>
+                    <input type="text" disabled value={quantity} onChange={event => setQuantity(event.target.value)} />
+                    <button onClick={() => updateQuantity(true)}>
+                      <FiPlus />
+                    </button>
+                  </Quantity>
 
-                <AddToCart onClick={addToCart}>
-                  Adicionar ao carrinho
-                  <FiShoppingCart />
-                </AddToCart>
-              </FinishOrderArea>
+                  <AddToCart onClick={addToCart}>
+                    Adicionar ao carrinho
+                    <FiShoppingCart />
+                  </AddToCart>
+                </FinishOrderArea>
+              </ResponsiveDetails>
+
             </RightColumn>
+
           </MainContainer>
           <DescriptionArea>
             <h4>Descrição</h4>

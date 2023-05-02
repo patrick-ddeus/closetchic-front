@@ -1,6 +1,7 @@
 import styled from 'styled-components';
 import "@fontsource/raleway";
 import banner from "../../assets/men-banner.jpg";
+
 export const Container = styled.div`
   padding:0 72px;
 `;
@@ -10,6 +11,10 @@ export const Products = styled.div`
   gap:20px;
   flex-wrap:wrap;
   padding:0 72px;
+
+  @media screen and (max-width:1100px){
+    justify-content:center;
+  }
 `;
 
 export const PaginationButton = styled.button`
@@ -29,10 +34,14 @@ export const PaginationArea = styled.div`
   justify-content:center;
   gap:5px;
   margin-bottom:100px;
+
+  @media screen and (max-width:1100px){
+    margin-bottom:-100px;
+  }
 `;
 
 export const BannerMen = styled.div`
-  margin-top:-50px;
+  margin-top:-46px;
   margin-bottom:40px;
   height:350px;
   background: url(${banner});

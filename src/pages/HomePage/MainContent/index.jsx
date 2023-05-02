@@ -1,12 +1,12 @@
 import React from 'react';
-import { Container, Banner, BannerButton, TopSection, CardSection, Card, CardIcon } from './styles';
+import { Container, Banner, BannerButton, TopSection, CardSection, Card, CardIcon, MapSection } from './styles';
 import { FiSmile, FiDollarSign, FiBox, FiTruck } from "react-icons/fi";
 import FeatureProducts from './FeatureProducts';
 import DescountBanner from './DescountBanner';
 import { useNavigate } from 'react-router-dom';
 
 const MainContent = () => {
-    const navigate = useNavigate()
+    const navigate = useNavigate();
     return (
         <Container>
             <Banner>
@@ -59,6 +59,16 @@ const MainContent = () => {
             </CardSection>
             <FeatureProducts />
             <DescountBanner />
+            <MapSection >
+                <iframe
+                    src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d28061.00349420912!2d-52.83442988947884!3d-28.460705499916646!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x94fd493c92d28c8f%3A0x6ff21ca741cec0c8!2sN%C3%A3o-Me-Toque%2C%20RS%2C%2099470-000!5e0!3m2!1spt-BR!2sbr!4v1623249150399!5m2!1spt-BR!2sbr"
+                    width="100%"
+                    height="600"
+                    title='map'
+                    style={{ border: "0" }}
+                    allowfullscreen="" loading="lazy">
+                </iframe>
+            </MapSection>
         </Container>
     );
 };
