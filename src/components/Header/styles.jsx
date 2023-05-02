@@ -157,7 +157,8 @@ export const IconsArea = styled.div`
     display:flex;
     align-items:center;
     justify-content:center;
-    color:black;
+    color:#1c232c;
+    font-weight:600;
     position:absolute;
     top:10px;
     left:-10px;
