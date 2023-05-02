@@ -23,7 +23,7 @@ import doneImg from "../../assets/done.png";
 import { motion } from 'framer-motion';
 
 const CheckoutPage = () => {
-    const { getTotalItemsFromCart, cart , coupon} = useContext(CartContext);
+    const { getTotalItemsFromCart, cart, coupon } = useContext(CartContext);
     const { token } = useContext(UserContext);
     const navigate = useNavigate();
     const [selectedPayment, setSelectedPayment] = useState("creditCard");
@@ -63,7 +63,7 @@ const CheckoutPage = () => {
     const handleValidInputs = () => {
         let isValid = true;
         for (let [key, value] of Object.entries(form)) {
-            if (key !== "complemento") { // Verifica se todos os campos exceto o complemento estão preenchidos.
+            if (key !== "complemento" && key !== "telefone") { // Verifica se todos os campos exceto o complemento e telefone estão preenchidos.
                 if (!value) {
                     setInvalidInputs((prevInvalidInputs) => ({ ...prevInvalidInputs, [key]: true }));
                     isValid = false;
@@ -144,8 +144,13 @@ const CheckoutPage = () => {
         return cart?.reduce((total, item) => total + (item.price * item.quantity), 0) - coupon.value;
     };
 
+    const cartGetSubtotal = () => {
+        return cart?.reduce((total, item) => total + (item.price * item.quantity), 0);
+    };
+
     const handleSubmitCheckout = async () => {
         if (!handleValidInputs()) return;
+        console.log("foi");
 
         const body = {
             orderItems: cart,
@@ -161,17 +166,24 @@ const CheckoutPage = () => {
                 postalCode: form.cep,
             },
             tel: form.telefone,
+            email: form.email,
+            priceItems: cartGetSubtotal(),
             totalPrice: cartGetTotal(),
             paymentMethod: selectedPayment,
             isPaid: true,
             paidAt: Date.now()
         };
+
         setLoading(true);
+
         try {
-            await ClosetChicApi.sendOrder(body, token);
-            setIsOpen(true);
+            const response = await ClosetChicApi.sendOrder(body, token);
+            if (response) {
+                setIsOpen(true);
+            }
         } catch (error) {
             console.error(error);
+            setIsOpen(false);
         } finally {
             setLoading(false);
         }
