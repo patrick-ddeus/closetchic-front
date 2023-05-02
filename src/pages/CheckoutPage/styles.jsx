@@ -113,8 +113,10 @@ export const CheckoutButton = styled.button`
   margin-top:40px;
   cursor:pointer;
 
-  max-width:386px;
-  margin:0 auto;
+  @media screen and (max-width:1100px) {
+    max-width:386px;
+    margin:0 auto;
+  }
 `;
 
 export const Blur = styled.div`

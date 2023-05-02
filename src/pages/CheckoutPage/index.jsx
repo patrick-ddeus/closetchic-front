@@ -56,7 +56,7 @@ const CheckoutPage = () => {
 
     useEffect(() => {
         if (!token) {
-            navigate('/');
+            navigate('/sign-in');
         }
     }, [navigate, token]);
 
@@ -150,7 +150,6 @@ const CheckoutPage = () => {
 
     const handleSubmitCheckout = async () => {
         if (!handleValidInputs()) return;
-        console.log("foi");
 
         const body = {
             orderItems: cart,
