@@ -15,7 +15,7 @@ export default function CartContextProvider({ children }) {
     async function fetchData() {
       if (token) {
         if (cart && cart.length === 0) {
-          const { products } = await closetChicApi.getCartProducts(token);
+          const products = await closetChicApi.getCartProducts(token);
           setCart(products);
         } else {
           closetChicApi.postCartProducts(cart, token);

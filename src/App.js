@@ -7,6 +7,7 @@ import CartPage from './pages/CartPage/index.jsx';
 import SignUpPage from './pages/SignUpPage/SignUpPage.js';
 import SignInPage from './pages/SignInPage/SignInPage.js';
 import CheckoutPage from './pages/CheckoutPage';
+import OrdersPage from './pages/OrdersPage';
 import { UserContextProvider } from './contexts/userContext.js';
 import CartContextProvider from './contexts/cartContext.js';
 
@@ -23,6 +24,7 @@ const App = () => {
             <Route path="/sign-up" element={<SignUpPage />} />
             <Route path="/sign-in" element={<SignInPage />} />
             <Route path="/checkout" element={<CheckoutPage />} />
+            <Route path="/my-orders" element={<OrdersPage />} />
             <Route path='/under-construction' element={<UnderConstructionPage />} />
           </Routes>
         </CartContextProvider>

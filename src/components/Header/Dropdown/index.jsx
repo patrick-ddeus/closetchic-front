@@ -8,11 +8,12 @@ import {
     DropdownListItem,
 } from './styles';
 
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { UserContext } from '../../../contexts/userContext';
 
 const Dropdown = ({ visible }) => {
     const { token, name } = useContext(UserContext);
+    const navigate = useNavigate()
     return <>
         {!token ? (
             <DropdownLogin visible={visible}>
@@ -42,7 +43,7 @@ const Dropdown = ({ visible }) => {
                         <IoChevronForwardOutline />
                     </DropdownListItem>
 
-                    <DropdownListItem>
+                    <DropdownListItem onClick={() => navigate('/my-orders')}>
                         <span>
                             <div>
                                 <IoBagHandle />
