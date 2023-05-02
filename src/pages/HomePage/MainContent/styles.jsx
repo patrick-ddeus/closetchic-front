@@ -30,6 +30,10 @@ export const Container = styled.div`
   width:100%;
   padding:0 72px;
   margin-bottom:110px;
+
+  @media screen and (max-width:1100px){
+    margin-bottom:-110px;
+  }
 `;
 
 export const BannerButton = styled.button`
@@ -115,5 +119,9 @@ export const CardIcon = styled.div`
 `;
 
 export const MapSection = styled.section`
-  margin:110px 0;
+  margin:30px 0;
+
+  @media screen and (max-width:1100px){
+    margin-top:300px;
+  }
 `;

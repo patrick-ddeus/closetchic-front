@@ -1,4 +1,5 @@
 import styled from 'styled-components';
+import "@fontsource/raleway"
 
 export const Container = styled.div`
 
@@ -7,6 +8,12 @@ height:100%;
   main{
     padding-top:-30px;
     padding:0 72px;
+  }
+
+  h2{
+    font-family:"Raleway", sans-serif;
+    font-size:30px;
+    margin-bottom:40px;
   }
 `;
 
