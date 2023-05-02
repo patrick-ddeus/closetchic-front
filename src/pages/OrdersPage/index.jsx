@@ -18,13 +18,12 @@ const OrdersPage = () => {
             try {
                 const response = await ClosetChicApi.getOrders(token);
                 setOrders(response.orders);
-                console.log(response.orders);
             } catch (error) {
                 console.error(error);
             }
         }
         fetchOrders();
-    }, []);
+    }, [token]);
 
     return (
         <>
