@@ -46,6 +46,11 @@ export const Container = styled.header`
       order:2;
     }
   }
+
+  @media screen and (max-width:600px){
+    justify-content:center;
+    text-align:center;
+  }
 `;
 
 export const List = styled.ul`
@@ -130,6 +135,10 @@ export const SearchIconsArea = styled.div`
   display:flex;
   align-items: center;
   gap:60px;
+
+  @media screen and (max-width:640px){
+    display:none;
+  }
 `;
 
 export const IconsArea = styled.div`

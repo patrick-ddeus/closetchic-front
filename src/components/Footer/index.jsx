@@ -1,7 +1,7 @@
 import React from 'react';
 import cardPayments from "../../assets/payments.png";
 import { Container, GridContainer, BrandContainer, Column, CopyrightContainer, ResponsiveFooter } from './styles';
-import { IoBagOutline, IoHomeOutline, IoHeartOutline } from "react-icons/io5";
+import { IoBagOutline, IoHomeOutline, IoHeartOutline, IoCartOutline } from "react-icons/io5";
 import { useNavigate } from "react-router-dom";
 const Footer = () => {
     const navigate = useNavigate();
@@ -52,6 +52,7 @@ const Footer = () => {
                 <IoHeartOutline onClick={() => navigate('/under-construction')}/>
                 <IoHomeOutline onClick={() => navigate('/')}/>
                 <IoBagOutline onClick={() => navigate('/products')}/>
+                <IoCartOutline className="cartIcon" onClick={() => navigate('/cart')}/>
             </ResponsiveFooter>
         </>
     );

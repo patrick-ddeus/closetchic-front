@@ -10,6 +10,10 @@ export const MainContainer = styled.div`
   @media screen and (max-width:1100px){
     grid-template-columns: 1fr;
   }
+
+  @media screen and (max-width:640px){
+    padding:0 42px;
+  }
 `;
 
 export const LeftColumn = styled.div`
@@ -67,6 +71,10 @@ export const MiniatureArea = styled.div`
     margin-top:0;   
     margin-bottom:0;
   }
+
+  @media screen and (max-width:640px){
+    display:none;
+  }
 `;
 
 export const RightColumn = styled.div`
@@ -116,6 +124,11 @@ export const SizeArea = styled.div`
 
     @media screen and (max-width:1100px){
       border:0;
+    }
+
+    @media screen and (max-width:640px){
+      border-bottom:1px solid #E3E3E3;
+      width:100%;
     }
 `;
 
@@ -249,6 +262,10 @@ export const DescriptionArea = styled.div`
   @media screen and (max-width:1100px){
     margin-top:60px;
   }
+
+  @media screen and (max-width:640px){
+    padding:0 42px;
+  }
 `;
 
 export const ResponsibleTitle = styled.div`
@@ -270,11 +287,13 @@ margin-bottom:40px;
 
 export const ResponsiveDetails = styled.div`
 
-@media screen and (max-width:1100px){
-  display:flex;
-  justify-content:space-between;
-  border-bottom:1px solid #E3E3E3;
-  padding-bottom:10px;
+  @media screen and (max-width:1100px){
+    display:flex;
+    justify-content:space-between;
+    flex-wrap:wrap;
+    border-bottom:1px solid #E3E3E3;
+    padding-bottom:10px;
   }
+
   
 `;

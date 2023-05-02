@@ -55,4 +55,8 @@ export const BannerMen = styled.div`
   text-align:left;
   padding-left:45px;
   font-style:italic;
+
+  @media screen and (max-width:640px){
+    background-position:0;
+  }
 `;

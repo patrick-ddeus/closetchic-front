@@ -30,21 +30,21 @@ const OrdersPage = () => {
             <Header />
             <Container>
                 <main>
-                    <h2>Orders</h2>
+                    <h2>Meus Pedidos</h2>
                     <Table>
                         <thead>
-                            <th>Order</th>
-                            <th>Date</th>
+                            <th>Pedido</th>
+                            <th>Data</th>
                             <th>Status</th>
                             <th>Total</th>
-                            <th colSpan={2}>Action</th>
+                            <th colSpan={2}>Ações</th>
                         </thead>
                         <tbody>
                             {orders?.map((order) => (
                                 <tr>
                                     <td>#{order._id}</td>
                                     <td>{dayjs(order.paidAt).locale("pt-br").format("LLLL")}</td>
-                                    <td>Completada</td>
+                                    <td>Completa</td>
                                     <td>{order.totalPrice.toLocaleString("pt-br", { style: 'currency', currency: 'BRL' })} para {order.orderItems.length} item(s)</td>
                                     <td colSpan={2} className="button-td">
                                         <button>

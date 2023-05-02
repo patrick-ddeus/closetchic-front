@@ -1,5 +1,6 @@
 import styled from 'styled-components';
 import BannerImage from "../../../assets/banner-1280.jpg";
+import BannerImage640 from "../../../assets/banner-640.jpg";
 import "@fontsource/raleway";
 import "@fontsource/raleway/700.css";
 import "@fontsource/raleway/600.css";
@@ -24,6 +25,15 @@ export const Banner = styled.div`
     font-size:73px;
     text-align:center;
   }
+
+  @media screen and (max-width:800px) {
+    background: linear-gradient(0deg, rgba(0, 0, 0, 0.65), rgba(0, 0, 0, 0.65)), url(${BannerImage640});
+    background-size: cover;
+
+    h2{
+    font-size:33px;
+  }
+  }
 `;
 
 export const Container = styled.div`
@@ -33,6 +43,7 @@ export const Container = styled.div`
 
   @media screen and (max-width:1100px){
     margin-bottom:-110px;
+    padding: 0 30px;
   }
 `;
 
@@ -57,6 +68,7 @@ export const TopSection = styled.section`
   margin:85px 0;
   display:flex;
   justify-content: space-between;
+  flex-wrap:wrap;
   align-items: center;
 
   div:nth-child(1){
@@ -85,12 +97,37 @@ export const TopSection = styled.section`
     }
   }
 
+  @media screen and (max-width:1100px){
+    margin:85px 0 45px;
+    text-align:center;
+
+    div:nth-child(1){
+      padding-bottom:20px;
+
+      p{
+        width:100%;
+      }
+    }
+
+    div:nth-child(2){
+      border-top:2px solid black;
+      border-left:0;
+      padding-left:0;
+    }
+  }
+
 `;
 
 export const CardSection = styled.section`
   display:flex;
   justify-content:space-between;
   flex-wrap:wrap;
+
+  @media screen and (max-width:600px){
+    gap:30px;
+    justify-content:center;
+    text-align:center;
+  }
 `;
 
 export const Card = styled.div`
@@ -101,6 +138,13 @@ export const Card = styled.div`
         width:290px;
         margin-top:10px;
     }
+
+    @media screen and (max-width:1100px){
+      width:220px;
+      p{
+        width:250px;
+      }
+  }
 `;
 
 export const CardIcon = styled.div`
@@ -116,6 +160,10 @@ export const CardIcon = styled.div`
   svg{
     font-size:26px;
   }
+
+  @media screen and (max-width:1100px){
+      margin:10px auto;
+  }
 `;
 
 export const MapSection = styled.section`
@@ -123,5 +171,11 @@ export const MapSection = styled.section`
 
   @media screen and (max-width:1100px){
     margin-top:300px;
+  }
+
+  @media screen and (max-width:600px){
+    h3{
+      margin-bottom:30px;
+    }
   }
 `;

@@ -97,7 +97,17 @@ export const ResponsiveFooter = styled.div`
     cursor:pointer;
   }
 
+  .cartIcon{
+    display:none;
+  }
+
   @media screen and (min-width:1100px){
     display:none;
+  }
+
+  @media screen and (max-width:640px){
+    .cartIcon{
+      display:initial;
+    }
   }
 `;

@@ -115,7 +115,7 @@ export const CheckoutButton = styled.button`
 
   @media screen and (max-width:1100px) {
     max-width:386px;
-    margin:0 auto;
+    margin:40px auto;
   }
 `;
 
