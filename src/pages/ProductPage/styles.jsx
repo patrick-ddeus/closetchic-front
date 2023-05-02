@@ -269,8 +269,12 @@ margin-bottom:40px;
 `;
 
 export const ResponsiveDetails = styled.div`
+
+@media screen and (max-width:1100px){
   display:flex;
   justify-content:space-between;
   border-bottom:1px solid #E3E3E3;
   padding-bottom:10px;
+  }
+  
 `;
