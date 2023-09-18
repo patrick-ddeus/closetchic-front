@@ -1,70 +1,46 @@
-# Getting Started with Create React App
+# ClosetChic
+Esse é o frontend do projeto ClosetChic um E-commerce que tem como tecnologias principais o React para construção de aplicações SPA o styled-components para estilização e o React Router DOM para gerenciamento de rotas da aplicação.
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+# Imagens
 
-## Available Scripts
+![image](https://github.com/patrick-ddeus/closetchic-front/assets/100157955/66f02493-ceda-4d6e-a771-9437cb41f721)
+![image](https://github.com/patrick-ddeus/closetchic-front/assets/100157955/8963fb2d-5515-4b45-9638-806e6cc344b4)
+![image](https://github.com/patrick-ddeus/closetchic-front/assets/100157955/2942333b-7a91-4088-baa0-69f0b8b309e6)
+![image](https://github.com/patrick-ddeus/closetchic-front/assets/100157955/d5af1acc-74ac-42b9-986f-b8f70d246d0b)
+![image](https://github.com/patrick-ddeus/closetchic-front/assets/100157955/29bbc7af-b650-497f-9946-9885c43712d9)
 
-In the project directory, you can run:
+## Tecnologias
+As seguintes ferramentas e tecnologias foram utilizadas para desenvolver este projeto
 
-### `npm start`
+![NodeJS](https://img.shields.io/badge/node.js-6DA55F?style=for-the-badge&logo=node.js&logoColor=white)
+![React](https://img.shields.io/badge/react-%2320232a.svg?style=for-the-badge&logo=react&logoColor=%2361DAFB)
+![React Router](https://img.shields.io/badge/React_Router-CA4245?style=for-the-badge&logo=react-router&logoColor=white)
+![Redux](https://img.shields.io/badge/redux-%23593d88.svg?style=for-the-badge&logo=redux&logoColor=white)
+![Styled Components](https://img.shields.io/badge/styled--components-DB7093?style=for-the-badge&logo=styled-components&logoColor=white)
+![ESLint](https://img.shields.io/badge/ESLint-4B3263?style=for-the-badge&logo=eslint&logoColor=white)
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+## Como Executar
 
-### `npm test`
+1. Clone este repositório.
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+2. Instale as dependências:
 
-### `npm run build`
+    ```bash
+    npm i
+    ```
+3. Configure as variáves de ambiente
+   - Utilize o `.env.example` para preencher corretamente as credenciais de conexão com o banco
+  ```bash
+  REACT_APP_API_URL=URL-DA-API
+  ```
+4. Execute com o comando:
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+    ```bash
+    npm start
+    ```
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+5. Opcionalmente, você pode construir o projeto com o comando:
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
-
-### `npm run eject`
-
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
-
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
-
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
-
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
-
-### Analyzing the Bundle Size
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+    ```bash
+    npm run build
